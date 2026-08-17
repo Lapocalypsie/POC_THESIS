@@ -1,0 +1,73 @@
+# Identites du reseau (MSP) - genere les certificats X.509 de chaque organisation.
+# Une entree = une institution du cadre de reference (Ch. 6.4, allocation des roles).
+# Cryptogen = autorite de certification de developpement; exclusion de perimetre 8.1:
+# pas de PKI de production.
+
+OrdererOrgs:
+  # Operateur technique de la plateforme (ordering service). Il sequence les
+  # transactions mais n'endosse rien: delegation de l'operation technique sans
+  # delegation du controle institutionnel (R14).
+  - Name: Infra
+    Domain: infra.dvp.poc
+    EnableNodeOUs: true
+    Specs:
+      - Hostname: orderer
+        SANS:
+          - localhost
+
+PeerOrgs:
+  # Banque centrale: seule autorite d'emission du wCBDC (C2), pouvoir de pause (C1).
+  - Name: CentralBank
+    Domain: centralbank.dvp.poc
+    EnableNodeOUs: true
+    Template:
+      Count: 1
+      SANS:
+        - localhost
+    Users:
+      Count: 1
+
+  # CSD / notaire: endosse l'emission des titres (I1/I2). D2 = CSD-as-DLT-node.
+  - Name: CSD
+    Domain: csd.dvp.poc
+    EnableNodeOUs: true
+    Template:
+      Count: 1
+      SANS:
+        - localhost
+    Users:
+      Count: 1
+
+  # Banque commerciale A (vendeur / emetteur de ses propres obligations).
+  - Name: BankA
+    Domain: banka.dvp.poc
+    EnableNodeOUs: true
+    Template:
+      Count: 1
+      SANS:
+        - localhost
+    Users:
+      Count: 1
+
+  # Banque commerciale B (acheteur).
+  - Name: BankB
+    Domain: bankb.dvp.poc
+    EnableNodeOUs: true
+    Template:
+      Count: 1
+      SANS:
+        - localhost
+    Users:
+      Count: 1
+
+  # Superviseur: membre du channel (il voit tout, R11) mais sa signature ne
+  # satisfait aucune endorsement policy - lecture seule par construction.
+  - Name: Supervisor
+    Domain: supervisor.dvp.poc
+    EnableNodeOUs: true
+    Template:
+      Count: 1
+      SANS:
+        - localhost
+    Users:
+      Count: 1

@@ -1,0 +1,21 @@
+# --- Artefacts régénérables du PoC (voir network/scripts) ---
+# Packages chaincode et builds de staging (recréés par les scripts deploy-*)
+network/artifacts/
+
+# Matériel cryptographique généré par cryptogen (network-up.ps1)
+network/crypto/
+
+# Builds Gradle / Java
+**/build/
+**/bin/
+**/.gradle/
+*.class
+*.jar
+
+# --- Fichiers temporaires ---
+# Verrous Word/Office
+~$*
+# Système
+.DS_Store
+Thumbs.db
+desktop.ini

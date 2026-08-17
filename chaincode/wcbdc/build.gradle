@@ -1,0 +1,36 @@
+plugins {
+    id 'java'
+    id 'com.gradleup.shadow' version '9.0.0'
+}
+
+group 'poc.wcbdc'
+version '1.0'
+
+java {
+    sourceCompatibility = JavaVersion.VERSION_11
+    targetCompatibility = JavaVersion.VERSION_11
+}
+
+repositories {
+    mavenCentral()
+    // Le shim Fabric depend de com.github.everit-org.json-schema, publie sur JitPack.
+    maven { url 'https://jitpack.io' }
+}
+
+dependencies {
+    implementation 'org.hyperledger.fabric-chaincode-java:fabric-chaincode-shim:2.5.3'
+    implementation 'com.owlike:genson:1.6'
+    // Le shim n'expose ses protos qu'en scope runtime; ProposalGuard les lit a
+    // la compilation (versions alignees sur le runtimeClasspath du shim 2.5.3).
+    compileOnly 'org.hyperledger.fabric:fabric-protos:0.3.3'
+    compileOnly 'com.google.protobuf:protobuf-java:3.24.4'
+}
+
+shadowJar {
+    archiveBaseName = 'chaincode'
+    archiveClassifier = ''
+    archiveVersion = ''
+    manifest {
+        attributes 'Main-Class': 'org.hyperledger.fabric.contract.ContractRouter'
+    }
+}

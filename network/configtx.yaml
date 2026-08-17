@@ -1,0 +1,220 @@
+# Configuration du channel dvp-channel - le "rulebook" executable (couche L1 du
+# cadre de reference). Definit qui est membre, avec quels droits, et sous quelles
+# regles de gouvernance le code peut etre deploye ou modifie.
+
+Organizations:
+  - &Infra
+    Name: InfraMSP
+    ID: InfraMSP
+    MSPDir: crypto/ordererOrganizations/infra.dvp.poc/msp
+    Policies:
+      Readers:
+        Type: Signature
+        Rule: "OR('InfraMSP.member')"
+      Writers:
+        Type: Signature
+        Rule: "OR('InfraMSP.member')"
+      Admins:
+        Type: Signature
+        Rule: "OR('InfraMSP.admin')"
+    OrdererEndpoints:
+      - orderer.infra.dvp.poc:7050
+
+  - &CentralBank
+    Name: CentralBankMSP
+    ID: CentralBankMSP
+    MSPDir: crypto/peerOrganizations/centralbank.dvp.poc/msp
+    Policies:
+      Readers:
+        Type: Signature
+        Rule: "OR('CentralBankMSP.member')"
+      Writers:
+        Type: Signature
+        Rule: "OR('CentralBankMSP.member')"
+      Admins:
+        Type: Signature
+        Rule: "OR('CentralBankMSP.admin')"
+      Endorsement:
+        Type: Signature
+        Rule: "OR('CentralBankMSP.peer')"
+    AnchorPeers:
+      - Host: peer0.centralbank.dvp.poc
+        Port: 7051
+
+  - &CSD
+    Name: CSDMSP
+    ID: CSDMSP
+    MSPDir: crypto/peerOrganizations/csd.dvp.poc/msp
+    Policies:
+      Readers:
+        Type: Signature
+        Rule: "OR('CSDMSP.member')"
+      Writers:
+        Type: Signature
+        Rule: "OR('CSDMSP.member')"
+      Admins:
+        Type: Signature
+        Rule: "OR('CSDMSP.admin')"
+      Endorsement:
+        Type: Signature
+        Rule: "OR('CSDMSP.peer')"
+    AnchorPeers:
+      - Host: peer0.csd.dvp.poc
+        Port: 8051
+
+  - &BankA
+    Name: BankAMSP
+    ID: BankAMSP
+    MSPDir: crypto/peerOrganizations/banka.dvp.poc/msp
+    Policies:
+      Readers:
+        Type: Signature
+        Rule: "OR('BankAMSP.member')"
+      Writers:
+        Type: Signature
+        Rule: "OR('BankAMSP.member')"
+      Admins:
+        Type: Signature
+        Rule: "OR('BankAMSP.admin')"
+      Endorsement:
+        Type: Signature
+        Rule: "OR('BankAMSP.peer')"
+    AnchorPeers:
+      - Host: peer0.banka.dvp.poc
+        Port: 9051
+
+  - &BankB
+    Name: BankBMSP
+    ID: BankBMSP
+    MSPDir: crypto/peerOrganizations/bankb.dvp.poc/msp
+    Policies:
+      Readers:
+        Type: Signature
+        Rule: "OR('BankBMSP.member')"
+      Writers:
+        Type: Signature
+        Rule: "OR('BankBMSP.member')"
+      Admins:
+        Type: Signature
+        Rule: "OR('BankBMSP.admin')"
+      Endorsement:
+        Type: Signature
+        Rule: "OR('BankBMSP.peer')"
+    AnchorPeers:
+      - Host: peer0.bankb.dvp.poc
+        Port: 10051
+
+  - &Supervisor
+    Name: SupervisorMSP
+    ID: SupervisorMSP
+    MSPDir: crypto/peerOrganizations/supervisor.dvp.poc/msp
+    Policies:
+      Readers:
+        Type: Signature
+        Rule: "OR('SupervisorMSP.member')"
+      Writers:
+        Type: Signature
+        Rule: "OR('SupervisorMSP.member')"
+      Admins:
+        Type: Signature
+        Rule: "OR('SupervisorMSP.admin')"
+      Endorsement:
+        Type: Signature
+        Rule: "OR('SupervisorMSP.peer')"
+    AnchorPeers:
+      - Host: peer0.supervisor.dvp.poc
+        Port: 11051
+
+Capabilities:
+  Channel: &ChannelCapabilities
+    V2_0: true
+  Orderer: &OrdererCapabilities
+    V2_0: true
+  Application: &ApplicationCapabilities
+    V2_0: true
+
+Application: &ApplicationDefaults
+  Organizations:
+  Policies:
+    Readers:
+      Type: ImplicitMeta
+      Rule: "ANY Readers"
+    Writers:
+      Type: ImplicitMeta
+      Rule: "ANY Writers"
+    Admins:
+      Type: ImplicitMeta
+      Rule: "MAJORITY Admins"
+    # Gouvernance du code executable: deployer ou modifier un chaincode exige
+    # l'approbation d'une MAJORITE des organisations membres (3 sur 5).
+    # Distinction application/amendement du rulebook (Ch. 6.5, R02).
+    LifecycleEndorsement:
+      Type: ImplicitMeta
+      Rule: "MAJORITY Endorsement"
+    Endorsement:
+      Type: ImplicitMeta
+      Rule: "MAJORITY Endorsement"
+  Capabilities:
+    <<: *ApplicationCapabilities
+
+Orderer: &OrdererDefaults
+  OrdererType: etcdraft
+  Addresses:
+    - orderer.infra.dvp.poc:7050
+  EtcdRaft:
+    Consenters:
+      - Host: orderer.infra.dvp.poc
+        Port: 7050
+        ClientTLSCert: crypto/ordererOrganizations/infra.dvp.poc/orderers/orderer.infra.dvp.poc/tls/server.crt
+        ServerTLSCert: crypto/ordererOrganizations/infra.dvp.poc/orderers/orderer.infra.dvp.poc/tls/server.crt
+  BatchTimeout: 2s
+  BatchSize:
+    MaxMessageCount: 10
+    AbsoluteMaxBytes: 99 MB
+    PreferredMaxBytes: 512 KB
+  Organizations:
+  Policies:
+    Readers:
+      Type: ImplicitMeta
+      Rule: "ANY Readers"
+    Writers:
+      Type: ImplicitMeta
+      Rule: "ANY Writers"
+    Admins:
+      Type: ImplicitMeta
+      Rule: "MAJORITY Admins"
+    BlockValidation:
+      Type: ImplicitMeta
+      Rule: "ANY Writers"
+
+Channel: &ChannelDefaults
+  Policies:
+    Readers:
+      Type: ImplicitMeta
+      Rule: "ANY Readers"
+    Writers:
+      Type: ImplicitMeta
+      Rule: "ANY Writers"
+    Admins:
+      Type: ImplicitMeta
+      Rule: "MAJORITY Admins"
+  Capabilities:
+    <<: *ChannelCapabilities
+
+Profiles:
+  DvPChannel:
+    <<: *ChannelDefaults
+    Orderer:
+      <<: *OrdererDefaults
+      Organizations:
+        - *Infra
+      Capabilities: *OrdererCapabilities
+    Application:
+      <<: *ApplicationDefaults
+      Organizations:
+        - *CentralBank
+        - *CSD
+        - *BankA
+        - *BankB
+        - *Supervisor
+      Capabilities: *ApplicationCapabilities
