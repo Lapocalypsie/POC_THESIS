@@ -1,0 +1,70 @@
+﻿# Scenario S1 (happy path) - trade S1-20260903-220244
+# ISIN FR0001 | titres 100000 | cash 95000 EUR
+# Vendeur BankAMSP -> Acheteur BankBMSP
+
+== SOLDES AVANT S1 ==
+  bondSeller   = 700000
+  bondBuyer    = 300000
+  cashSeller   = 845000
+  cashBuyer    = 655000
+  availSeller  = 700000
+
+== I3 proposeTrade (BankB, acheteuse) ==
+docker.exe : 2026-09-03 20:03:03.774 UTC 0001 INFO [chaincodeCmd] ClientWait -> txid 
+[1bc92180a4d801cc5cfb04611b9b9147bfb4881343caa13c8cb87d31be995312] committed with status (VALID) at peer0.bankb.dvp.poc:10051
+2026-09-03 20:03:03.777 UTC 0002 INFO [chaincodeCmd] ClientWait -> txid [1bc92180a4d801cc5cfb04611b9b9147bfb4881343caa13c8cb87d31be995312] 
+committed with status (VALID) at peer0.banka.dvp.poc:9051
+2026-09-03 20:03:03.777 UTC 0003 INFO [chaincodeCmd] chaincodeInvokeOrQuery -> Chaincode invoke successful. result: status:200 
+payload:"PROPOSED" 
+
+== confirmTrade (BankA, vendeuse - cosignature R05) ==
+docker.exe : 2026-09-03 20:03:06.262 UTC 0001 INFO [chaincodeCmd] ClientWait -> txid 
+[17cf7d8dc89971c0df40fbadbb9574488de04f4c6c23d6bd9d6ff42266c68a04] committed with status (VALID) at peer0.banka.dvp.poc:9051
+2026-09-03 20:03:06.264 UTC 0002 INFO [chaincodeCmd] ClientWait -> txid [17cf7d8dc89971c0df40fbadbb9574488de04f4c6c23d6bd9d6ff42266c68a04] 
+committed with status (VALID) at peer0.bankb.dvp.poc:10051
+2026-09-03 20:03:06.264 UTC 0003 INFO [chaincodeCmd] chaincodeInvokeOrQuery -> Chaincode invoke successful. result: status:200 
+payload:"PENDING" 
+
+== executeSettlement - SWAP ATOMIQUE O1+O2 ==
+docker.exe : 2026-09-03 20:03:10.364 UTC 0001 INFO [chaincodeCmd] ClientWait -> txid 
+[c41dbae194925c2431b4ae82763707fd884e516a99468af3c963b0bd76a10e62] committed with status (VALID) at peer0.bankb.dvp.poc:10051
+2026-09-03 20:03:10.368 UTC 0002 INFO [chaincodeCmd] ClientWait -> txid [c41dbae194925c2431b4ae82763707fd884e516a99468af3c963b0bd76a10e62] 
+committed with status (VALID) at peer0.banka.dvp.poc:9051
+2026-09-03 20:03:10.368 UTC 0003 INFO [chaincodeCmd] chaincodeInvokeOrQuery -> Chaincode invoke successful. result: status:200 
+payload:"SETTLED" 
+
+== Etat du trade apres reglement ==
+{"bondAmount":100000,"businessTimeoutTs":1788466080,"buyerMsp":"BankBMSP","cashAmount":95000,"currency":"EUR","isin":"FR0001","proposerMsp":"BankBMSP","reason":null,"safetyTimeoutTs":1788466380,"sellerMsp":"BankAMSP","status":"SETTLED","tradeId":"S1-20260903-220244"}
+
+== SOLDES APRES S1 ==
+  bondSeller   = 600000
+  bondBuyer    = 400000
+  cashSeller   = 940000
+  cashBuyer    = 560000
+  availSeller  = 600000
+
+== TABLEAU 5.5 - Ledger balances before and after scenario S1 ==
+
+Account                     Asset                          Before  After   Delta
+-------                     -----                          ------  -----   -----
+Seller - securities account Tokenised bond (FR0001, units) 700000 600000 -100000
+Buyer - securities account  Tokenised bond (FR0001, units) 300000 400000  100000
+Seller - cash account       wCBDC (EUR)                    845000 940000   95000
+Buyer - cash account        wCBDC (EUR)                    655000 560000  -95000
+Escrow held by DvPChaincode Earmarked bond (FR0001, units)      0      0       0
+
+
+
+== INVARIANT DvP ==
+  delta titres vendeur   = -100000  (attendu -100000)
+  delta titres acheteur  = 100000  (attendu 100000)
+  delta cash vendeur     = 95000  (attendu 95000)
+  delta cash acheteur    = -95000  (attendu -95000)
+  escrow apres reglement = 0  (attendu 0)
+  VERDICT : PASS - les deux jambes ont bouge des montants instruits
+
+# Note de capture : le CLI Fabric ecrit ses lignes INFO sur stderr ; PowerShell les
+# rend comme des enregistrements d'erreur (NativeCommandError). Ces enregistrements
+# et les sequences d'echappement ANSI ont ete retires de la capture. Aucune ligne de
+# resultat n'a ete modifiee : txid, statuts VALID, payloads, soldes et verdict sont
+# ceux de l'execution. Sortie brute reproductible avec network/scripts/capture-evidence.ps1.

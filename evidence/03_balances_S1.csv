@@ -1,0 +1,6 @@
+﻿"Account","Asset","Before","After","Delta"
+"Seller - securities account","Tokenised bond (FR0001, units)","700000","600000","-100000"
+"Buyer - securities account","Tokenised bond (FR0001, units)","300000","400000","100000"
+"Seller - cash account","wCBDC (EUR)","845000","940000","95000"
+"Buyer - cash account","wCBDC (EUR)","655000","560000","-95000"
+"Escrow held by DvPChaincode","Earmarked bond (FR0001, units)","0","0","0"

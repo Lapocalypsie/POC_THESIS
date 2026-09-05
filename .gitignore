@@ -1,21 +1,35 @@
-# --- Artefacts régénérables du PoC (voir network/scripts) ---
-# Packages chaincode et builds de staging (recréés par les scripts deploy-*)
+# --- Generated Fabric material (recreated by network-up.ps1) ---------------
+network/crypto/
 network/artifacts/
 
-# Matériel cryptographique généré par cryptogen (network-up.ps1)
-network/crypto/
-
-# Builds Gradle / Java
+# --- Gradle / Java build output --------------------------------------------
+build/
+.gradle/
 **/build/
-**/bin/
 **/.gradle/
 *.class
 *.jar
+!gradle/wrapper/gradle-wrapper.jar
 
-# --- Fichiers temporaires ---
-# Verrous Word/Office
-~$*
-# Système
-.DS_Store
+# --- IDE --------------------------------------------------------------------
+.idea/
+.vscode/
+*.iml
+.classpath
+.project
+.settings/
+
+# --- OS ---------------------------------------------------------------------
 Thumbs.db
-desktop.ini
+Desktop.ini
+.DS_Store
+
+# --- Evidence: the artefacts are committed, the bulky by-products are not ---
+evidence/05_junit/binary/
+tests/build/
+
+# --- Working notes, not part of the published material -------------------
+"Claude outputs"/
+
+# --- Amorcage local du depot, pas destine a etre publie -------------------
+init-repo.ps1

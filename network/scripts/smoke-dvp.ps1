@@ -1,6 +1,6 @@
 # Tests de fumee du coordinateur dvp (ex-phase D de deploy-dvp.ps1).
 # Prerequis: reseau up, chaincodes wcbdc/bond/dvp deployes.
-# Prefiguration des tests T1-T9 du chapitre 8.
+# Prefiguration des tests T1-T9 du chapitre 5.
 $ErrorActionPreference = 'Stop'
 
 $ORD_CA  = '/work/crypto/ordererOrganizations/infra.dvp.poc/orderers/orderer.infra.dvp.poc/tls/ca.crt'
@@ -53,14 +53,25 @@ $BANKS_PEERS = @('--peerAddresses', 'peer0.banka.dvp.poc:9051', '--tlsRootCertFi
                  '--peerAddresses', 'peer0.bankb.dvp.poc:10051', '--tlsRootCertFiles', $bbTls)
 $CB_PEER     = @('--peerAddresses', 'peer0.centralbank.dvp.poc:7051', '--tlsRootCertFiles', $cbTls)
 
+# NB: PowerShell 5.1 ne protege pas un argument natif qui contient deja des
+# guillemets (\") - le moindre espace coupe alors le JSON en deux arguments
+# ("unexpected end of JSON input" cote peer). On refuse donc tout espace
+# plutot que d'echouer de facon cryptique: valeurs libres avec des tirets.
+function AssertNoSpace([string]$json) {
+    if ($json -match '\s') {
+        throw "argument chaincode contenant un espace (coupe par PowerShell 5.1): $json"
+    }
+}
 function InvokeCC([string[]]$org, [string[]]$peers, [string]$cc, [string]$json) {
     $json = $json.Replace('\"T1', '\"T' + $R + '-1')
+    AssertNoSpace $json
     & docker exec @org dvp-cli peer chaincode invoke -o $ORDERER --tls --cafile $ORD_CA `
         -C $CHANNEL -n $cc @peers -c $json --waitForEvent
     return $LASTEXITCODE
 }
 function QueryCC([string[]]$org, [string]$cc, [string]$json) {
     $json = $json.Replace('\"T1', '\"T' + $R + '-1')
+    AssertNoSpace $json
     return (& docker exec @org dvp-cli peer chaincode query -C $CHANNEL -n $cc -c $json)
 }
 # NB: noms locaux distincts de $BA/$BB/$CB - les variables PowerShell sont

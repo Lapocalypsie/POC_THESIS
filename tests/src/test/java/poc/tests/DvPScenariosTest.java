@@ -20,10 +20,10 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 /**
- * Suite T1-T9 du chapitre 8 (section 8.7) : un test par scenario fixe au
- * chapitre 4 (4.5), execute bout-en-bout contre le reseau reel via le Gateway.
+ * Suite T1-T9 du chapitre 5 (section 5.4) : un test par scenario fixe a la
+ * section 3.6.3, execute bout-en-bout contre le reseau reel via le Gateway.
  * Chaque scenario verifie (i) l'etat terminal atteint et (ii) l'invariant DvP
- * (section 8.6) : les titres sont transferes si et seulement si le cash l'est,
+ * (section 5.1) : les titres sont transferes si et seulement si le cash l'est,
  * observe sur les quatre soldes avant/apres. Aucun mock.
  */
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
@@ -196,7 +196,7 @@ class DvPScenariosTest {
 
     @Test
     @Order(9)
-    @DisplayName("T8 - contournement: une jambe seule est inexecutable (ProposalGuard, invariant 8.6)")
+    @DisplayName("T8 - contournement: une jambe seule est inexecutable (ProposalGuard)")
     void t8_bypassAttempt() throws Exception {
         final long[] before = snapshot();
         final Contract bondSettlement = bankB.contract("bond", "bondSettlement");
@@ -219,7 +219,7 @@ class DvPScenariosTest {
     }
 
     // ------------------------------------------------------------------
-    // Helpers - l'invariant DvP observe sur les quatre soldes (section 8.6)
+    // Helpers - l'invariant DvP observe sur les quatre soldes (section 5.1)
     // ------------------------------------------------------------------
 
     private String trade(final String name) {

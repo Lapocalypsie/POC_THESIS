@@ -1,10 +1,10 @@
 package poc.dvp;
 
 /**
- * Etat d'un trade dans la machine a etats du coordinateur DvP (section 8.4).
+ * Etat d'un trade dans la machine a etats du coordinateur DvP (section 5.2).
  * Serialise en JSON dans le world state sous la cle "trade:<tradeId>".
  * Les statuts terminaux sont ceux sur lesquels l'invariant DvP est verifie
- * (section 8.6) : l'ensemble est fini et ferme.
+ * (section 5.1) : l'ensemble est fini et ferme.
  */
 public final class Trade {
 

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="poc.tests.DvPScenariosTest" tests="10" skipped="0" failures="0" errors="0" timestamp="2026-09-03T20:03:43.665Z" hostname="d414d58fbcf2" time="75.577">
+  <properties/>
+  <testcase name="T1 - happy path: PROPOSED -&gt; PENDING -&gt; SETTLED, les deux jambes bougent (R05)" classname="poc.tests.DvPScenariosTest" time="6.687"/>
+  <testcase name="T2 - escrow jamais finance -&gt; RELEASED_BUSINESS, aucune jambe ne bouge (R09/R10)" classname="poc.tests.DvPScenariosTest" time="18.829"/>
+  <testcase name="T2bis - escrow puis on-ramp C2 -&gt; SETTLED (R09)" classname="poc.tests.DvPScenariosTest" time="11.964"/>
+  <testcase name="T3 - filet de securite -&gt; RELEASED_SAFETY (R10)" classname="poc.tests.DvPScenariosTest" time="10.459"/>
+  <testcase name="T4 - rejet compliance: plafond R16 depasse -&gt; REJECTED_COMPLIANCE" classname="poc.tests.DvPScenariosTest" time="2.178"/>
+  <testcase name="T5 - echec eligibilite: partie non admise -&gt; REJECTED_INELIGIBLE (R03)" classname="poc.tests.DvPScenariosTest" time="2.185"/>
+  <testcase name="T6 - pause C1: reglement suspendu, reprise; pause reservee (R14)" classname="poc.tests.DvPScenariosTest" time="6.371"/>
+  <testcase name="T7 - operations reservees: mint wCBDC hors banque centrale refuse (R14)" classname="poc.tests.DvPScenariosTest" time="0.037"/>
+  <testcase name="T8 - contournement: une jambe seule est inexecutable (ProposalGuard, invariant 8.6)" classname="poc.tests.DvPScenariosTest" time="0.079"/>
+  <testcase name="T9 - pas de double reglement: rejouer un trade SETTLED est refuse" classname="poc.tests.DvPScenariosTest" time="0.105"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

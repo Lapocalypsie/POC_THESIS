@@ -1,0 +1,50 @@
+﻿# Sonde T8 - execution a une jambe (ProposalGuard)
+# Trade cible : S1-20260903-220244 (deja SETTLED)
+# Attendu : refus mentionnant le coordinateur dvp ; aucun solde ne bouge
+# Capture le 2026-09-04 12:37:57 +02:00 par capture-probes.ps1
+
+== SOLDES AVANT T8 ==
+  bondSeller   = 597000
+  bondBuyer    = 403000
+  cashSeller   = 2000000
+  cashBuyer    = 100000
+  availSeller  = 597000
+
+== APPEL - doit etre REFUSE ==
+docker.exe : Error: endorsement failure during invoke. response: status:500 message:"transferForTrade is only invocable through the dvp coordinator; the 
+signed proposal targets 'bond'" payload:"UNAUTHORIZED" 
+
+  code de retour = 1   (attendu : different de 0)
+
+== SOLDES APRES T8 ==
+  bondSeller   = 597000
+  bondBuyer    = 403000
+  cashSeller   = 2000000
+  cashBuyer    = 100000
+  availSeller  = 597000
+
+== ETAT DU TRADE APRES LA SONDE ==
+{"bondAmount":100000,"businessTimeoutTs":1788466080,"buyerMsp":"BankBMSP","cashAmount":95000,"currency":"EUR","isin":"FR0001","proposerMsp":"BankBMSP","reason":null,"safetyTimeoutTs":1788466380,"sellerMsp":"BankAMSP","status":"SETTLED","tradeId":"S1-20260903-220244"}
+
+== SOLDES AVANT / APRES T8 ==
+
+Account                     Asset                           Before   After Delta
+-------                     -----                           ------   ----- -----
+Seller - securities account Tokenised bond (FR0001, units)  597000  597000     0
+Buyer - securities account  Tokenised bond (FR0001, units)  403000  403000     0
+Seller - cash account       wCBDC (EUR)                    2000000 2000000     0
+Buyer - cash account        wCBDC (EUR)                     100000  100000     0
+Escrow held by DvPChaincode Earmarked bond (FR0001, units)       0       0     0
+
+
+
+== VERIFICATION ==
+  appel refuse            : True
+  aucun solde n'a bouge   : True
+  VERDICT : PASS - refus, et les quatre soldes sont inchanges
+
+# Note de capture : le CLI Fabric ecrit ses lignes INFO sur stderr ; PowerShell les
+# rend comme des enregistrements d'erreur (NativeCommandError). Ces enregistrements
+# et les sequences d'echappement ANSI ont ete retires de la capture. Aucune ligne de
+# resultat n'a ete modifiee : txid, statuts VALID, payloads, soldes et verdict sont
+# ceux de l'execution. Sortie brute reproductible avec network/scripts/capture-probes.ps1.

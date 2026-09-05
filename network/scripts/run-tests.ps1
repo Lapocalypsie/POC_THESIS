@@ -1,6 +1,6 @@
-# Execute la suite T1-T9 du chapitre 8 (05_PoC/tests) dans un conteneur relie
-# au reseau du PoC. Le rapport JUnit (XML + HTML) est l'artefact de preuve du
-# paragraphe 8.7 (Annexe E).
+# Execute la suite T1-T9 du chapitre 5 (05_PoC/tests) dans un conteneur relie
+# au reseau du PoC. Le rapport JUnit (XML + HTML) est l'artefact de preuve
+# de la Figure 5.2 et de l'Annexe A du memoire.
 # Prerequis: reseau up, chaincodes deployes, smoke tests passes.
 $ErrorActionPreference = 'Stop'
 
@@ -23,4 +23,4 @@ if ($LASTEXITCODE -ne 0) {
 Write-Host ""
 Write-Host "Suite T1-T9 VERTE."
 Write-Host "  Rapport HTML : 05_PoC/tests/build/reports/tests/test/index.html"
-Write-Host "  Rapport XML  : 05_PoC/tests/build/test-results/test/ (pour l'Annexe E)"
+Write-Host "  Rapport XML  : 05_PoC/tests/build/test-results/test/ (pour l'Annexe A)"

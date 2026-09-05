@@ -1,0 +1,209 @@
+﻿# Suite T1-T9 - execution bout-en-bout via Fabric Gateway
+# Date            : 
+2026-09-03 22:05:00
+# Duree totale    : 
+107,6
+ s
+# Code de sortie  : 0 (
+SUCCES
+)
+
+Initialized native services in: /root/.gradle/native
+Initialized jansi services in: /root/.gradle/native
+The current JVM process isn't compatible with build requirement. The maximum heap size is insufficient.
+
+To honour the JVM settings for this build a single-use Daemon process will be forked. For more on this, please refer to https://docs.gradle.org/9.5.1/userguide/gradle_daemon.html#sec:disabling_the_daemon in the Gradle documentation.
+Starting process 'Gradle build daemon'. Working directory: /root/.gradle/daemon/9.5.1 Command: /opt/java/openjdk/bin/java --add-opens=java.base/java.lang=ALL-UNNAMED --add-opens=java.base/java.lang.invoke=ALL-UNNAMED --add-opens=java.base/java.util=ALL-UNNAMED --add-opens=java.prefs/java.util.prefs=ALL-UNNAMED --add-exports=jdk.compiler/com.sun.tools.javac.api=ALL-UNNAMED --add-exports=jdk.compiler/com.sun.tools.javac.util=ALL-UNNAMED --add-opens=java.base/java.nio.charset=ALL-UNNAMED --add-opens=java.base/java.net=ALL-UNNAMED --add-opens=java.base/java.util.concurrent=ALL-UNNAMED --add-opens=java.base/java.util.concurrent.atomic=ALL-UNNAMED --add-opens=java.xml/javax.xml.namespace=ALL-UNNAMED --add-opens=java.base/java.time=ALL-UNNAMED --enable-native-access=ALL-UNNAMED -Xmx512m -Dfile.encoding=UTF-8 -Duser.country=US -Duser.language=en -Duser.variant -cp /root/.gradle/wrapper/dists/gradle-9.5.1-bin/iq79hdu3mqx29lgffhp8bfmx/gradle-9.5.1/lib/gradle-daemon-main-9.5.1.jar -javaagent:/root/.gradle/wrapper/dists/gradle-9.5.1-bin/iq79hdu3mqx29lgffhp8bfmx/gradle-9.5.1/lib/agents/gradle-instrumentation-agent-9.5.1.jar org.gradle.launcher.daemon.bootstrap.GradleDaemon 9.5.1
+Successfully started process 'Gradle build daemon'
+An attempt to start the daemon took 2.285 secs.
+The client will now receive all logging from the daemon (pid: 47). The daemon log file: /root/.gradle/daemon/9.5.1/daemon-47.out.log
+Daemon will be stopped at the end of the build 
+Using 8 worker leases.
+Operational build model parameters: {cachingModelBuilding=false, configurationCache=false, configurationCacheDisabledReason=null, configurationCacheParallelLoad=false, configurationCacheParallelStore=false, configureOnDemand=false, invalidateCoupledProjects=false, isolatedProjects=false, modelAsProjectDependency=false, modelBuilding=false, parallelModelBuilding=false, parallelProjectConfiguration=false, parallelProjectExecution=false, resilientModelBuilding=false}
+Received JVM installation metadata from '/opt/java/openjdk': {JAVA_HOME=/opt/java/openjdk, JAVA_VERSION=25.0.3, JAVA_VENDOR=Eclipse Adoptium, RUNTIME_NAME=OpenJDK Runtime Environment, RUNTIME_VERSION=25.0.3+9-LTS, VM_NAME=OpenJDK 64-Bit Server VM, VM_VERSION=25.0.3+9-LTS, VM_VENDOR=Eclipse Adoptium, OS_ARCH=amd64}
+Watching the file system is configured to be enabled if available
+Not watching /tests since the file system is not supported
+File system watching is active
+Starting Build
+Caching disabled for Groovy DSL script compilation (cp_settings) because:
+  Build cache is disabled
+  Not worth caching.
+Compiling settings file '/tests/settings.gradle' using SubsetScriptTransformer.
+Caching disabled for Groovy DSL script compilation (settings) because:
+  Build cache is disabled
+  Not worth caching.
+Compiling settings file '/tests/settings.gradle' using BuildScriptTransformer.
+Settings evaluated using settings file '/tests/settings.gradle'.
+Projects loaded. Root project using build file '/tests/build.gradle'.
+Included projects: [root project 'dvp-poc-tests']
+
+> Configure project :
+Evaluating root project 'dvp-poc-tests' using build file '/tests/build.gradle'.
+Caching disabled for Groovy DSL script compilation (cp_proj) because:
+  Build cache is disabled
+  Not worth caching.
+Compiling build file '/tests/build.gradle' using SubsetScriptTransformer.
+Resolved plugin [id: 'java']
+Caching disabled for Groovy DSL script compilation (proj) because:
+  Build cache is disabled
+  Not worth caching.
+Compiling build file '/tests/build.gradle' using BuildScriptTransformer.
+All projects evaluated.
+Task name matched 'test'
+Selected primary task 'test' from project :
+Tasks to be executed: [task ':compileJava', task ':processResources', task ':classes', task ':compileTestJava', task ':processTestResources', task ':testClasses', task ':test']
+Tasks that were excluded: []
+Resolve mutations for :compileJava (Thread[#64,Execution worker,5,main]) started.
+:compileJava (Thread[#64,Execution worker,5,main]) started.
+
+> Task :compileJava NO-SOURCE
+Skipping task ':compileJava' as it has no source files and no previous output files.
+Resolve mutations for :processResources (Thread[#64,Execution worker,5,main]) started.
+:processResources (Thread[#64,Execution worker,5,main]) started.
+
+> Task :processResources NO-SOURCE
+Skipping task ':processResources' as it has no source files and no previous output files.
+Resolve mutations for :classes (Thread[#64,Execution worker,5,main]) started.
+:classes (Thread[#64,Execution worker,5,main]) started.
+
+> Task :classes UP-TO-DATE
+Skipping task ':classes' as it has no actions.
+Resolve mutations for :compileTestJava (Thread[#64,Execution worker,5,main]) started.
+:compileTestJava (Thread[#64,Execution worker,5,main]) started.
+
+> Task :compileTestJava
+Downloading https://repo.maven.apache.org/maven2/org/junit/jupiter/junit-jupiter/5.10.2/junit-jupiter-5.10.2.pom to /root/.gradle/.tmp/gradle_download2526197471646674768bin
+Downloading https://repo.maven.apache.org/maven2/org/hyperledger/fabric/fabric-gateway/1.5.1/fabric-gateway-1.5.1.pom to /root/.gradle/.tmp/gradle_download5408780145567877854bin
+Found locally available resource with matching checksum: [https://repo.maven.apache.org/maven2/org/junit/junit-bom/5.10.2/junit-bom-5.10.2.pom, /root/.m2/repository/org/junit/junit-bom/5.10.2/junit-bom-5.10.2.pom]
+Downloading https://repo.maven.apache.org/maven2/io/cucumber/cucumber-bom/7.16.1/cucumber-bom-7.16.1.pom to /root/.gradle/.tmp/gradle_download3130617904056146890bin
+Downloading https://repo.maven.apache.org/maven2/org/junit/junit-bom/5.10.2/junit-bom-5.10.2.module to /root/.gradle/.tmp/gradle_download2547839111080104488bin
+Downloading https://repo.maven.apache.org/maven2/io/cucumber/cucumber-jvm/7.16.1/cucumber-jvm-7.16.1.pom to /root/.gradle/.tmp/gradle_download15513418466358907646bin
+Downloading https://repo.maven.apache.org/maven2/io/cucumber/cucumber-parent/4.2.0/cucumber-parent-4.2.0.pom to /root/.gradle/.tmp/gradle_download3786411547535920566bin
+Downloading https://repo.maven.apache.org/maven2/org/junit/jupiter/junit-jupiter/5.10.2/junit-jupiter-5.10.2.module to /root/.gradle/.tmp/gradle_download11248010748864182004bin
+Downloading https://repo.maven.apache.org/maven2/io/grpc/grpc-bom/1.63.0/grpc-bom-1.63.0.pom to /root/.gradle/.tmp/gradle_download14154235700306084361bin
+Downloading https://repo.maven.apache.org/maven2/io/grpc/grpc-protobuf/1.63.0/grpc-protobuf-1.63.0.pom to /root/.gradle/.tmp/gradle_download7417487151710793608bin
+Downloading https://repo.maven.apache.org/maven2/org/bouncycastle/bcprov-jdk18on/1.78/bcprov-jdk18on-1.78.pom to /root/.gradle/.tmp/gradle_download16348328906003999477bin
+Downloading https://repo.maven.apache.org/maven2/org/bouncycastle/bcpkix-jdk18on/1.78/bcpkix-jdk18on-1.78.pom to /root/.gradle/.tmp/gradle_download14705590064145561065bin
+Downloading https://repo.maven.apache.org/maven2/io/grpc/grpc-stub/1.63.0/grpc-stub-1.63.0.pom to /root/.gradle/.tmp/gradle_download3718976384013043148bin
+Downloading https://repo.maven.apache.org/maven2/org/junit/jupiter/junit-jupiter-api/5.10.2/junit-jupiter-api-5.10.2.pom to /root/.gradle/.tmp/gradle_download4535265907649653835bin
+Downloading https://repo.maven.apache.org/maven2/org/junit/jupiter/junit-jupiter-params/5.10.2/junit-jupiter-params-5.10.2.pom to /root/.gradle/.tmp/gradle_download16369919539681120286bin
+Downloading https://repo.maven.apache.org/maven2/org/junit/jupiter/junit-jupiter-params/5.10.2/junit-jupiter-params-5.10.2.module to /root/.gradle/.tmp/gradle_download7913685691864346156bin
+Downloading https://repo.maven.apache.org/maven2/org/junit/jupiter/junit-jupiter-api/5.10.2/junit-jupiter-api-5.10.2.module to /root/.gradle/.tmp/gradle_download6046837816018304283bin
+Downloading https://repo.maven.apache.org/maven2/org/bouncycastle/bcutil-jdk18on/1.78/bcutil-jdk18on-1.78.pom to /root/.gradle/.tmp/gradle_download5622512883147375427bin
+Downloading https://repo.maven.apache.org/maven2/com/google/api/grpc/proto-google-common-protos/2.29.0/proto-google-common-protos-2.29.0.pom to /root/.gradle/.tmp/gradle_download2127620045123730364bin
+Downloading https://repo.maven.apache.org/maven2/com/google/protobuf/protobuf-java/3.25.1/protobuf-java-3.25.1.pom to /root/.gradle/.tmp/gradle_download933116179848729103bin
+Downloading https://repo.maven.apache.org/maven2/io/grpc/grpc-api/1.63.0/grpc-api-1.63.0.pom to /root/.gradle/.tmp/gradle_download10978676665531283875bin
+Downloading https://repo.maven.apache.org/maven2/com/google/protobuf/protobuf-parent/3.25.1/protobuf-parent-3.25.1.pom to /root/.gradle/.tmp/gradle_download4808410978801640766bin
+Downloading https://repo.maven.apache.org/maven2/com/google/protobuf/protobuf-bom/3.25.1/protobuf-bom-3.25.1.pom to /root/.gradle/.tmp/gradle_download13418894143428710703bin
+Downloading https://repo.maven.apache.org/maven2/com/google/guava/guava/32.1.3-android/guava-32.1.3-android.pom to /root/.gradle/.tmp/gradle_download7022839301149866091bin
+Downloading https://repo.maven.apache.org/maven2/com/google/guava/guava-parent/32.1.3-android/guava-parent-32.1.3-android.pom to /root/.gradle/.tmp/gradle_download13213400534840954789bin
+Downloading https://repo.maven.apache.org/maven2/com/google/guava/guava/32.1.3-android/guava-32.1.3-android.module to /root/.gradle/.tmp/gradle_download6024177571392108355bin
+Downloading https://repo.maven.apache.org/maven2/org/apiguardian/apiguardian-api/1.1.2/apiguardian-api-1.1.2.pom to /root/.gradle/.tmp/gradle_download7654926482376390755bin
+Downloading https://repo.maven.apache.org/maven2/org/opentest4j/opentest4j/1.3.0/opentest4j-1.3.0.pom to /root/.gradle/.tmp/gradle_download8719387423291929729bin
+Downloading https://repo.maven.apache.org/maven2/org/apiguardian/apiguardian-api/1.1.2/apiguardian-api-1.1.2.module to /root/.gradle/.tmp/gradle_download3166628898603256707bin
+Downloading https://repo.maven.apache.org/maven2/org/opentest4j/opentest4j/1.3.0/opentest4j-1.3.0.module to /root/.gradle/.tmp/gradle_download11182734375021354587bin
+Downloading https://repo.maven.apache.org/maven2/org/junit/platform/junit-platform-commons/1.10.2/junit-platform-commons-1.10.2.pom to /root/.gradle/.tmp/gradle_download3911518880806557726bin
+Downloading https://repo.maven.apache.org/maven2/org/junit/platform/junit-platform-commons/1.10.2/junit-platform-commons-1.10.2.module to /root/.gradle/.tmp/gradle_download18145580548540382153bin
+Downloading https://repo.maven.apache.org/maven2/com/google/errorprone/error_prone_annotations/2.23.0/error_prone_annotations-2.23.0.pom to /root/.gradle/.tmp/gradle_download17067138890994888342bin
+Downloading https://repo.maven.apache.org/maven2/com/google/errorprone/error_prone_parent/2.23.0/error_prone_parent-2.23.0.pom to /root/.gradle/.tmp/gradle_download3037300897218665327bin
+Downloading https://repo.maven.apache.org/maven2/org/checkerframework/checker-qual/3.37.0/checker-qual-3.37.0.pom to /root/.gradle/.tmp/gradle_download8420441433666581847bin
+Downloading https://repo.maven.apache.org/maven2/org/checkerframework/checker-qual/3.37.0/checker-qual-3.37.0.module to /root/.gradle/.tmp/gradle_download936103293780065049bin
+Downloading https://repo.maven.apache.org/maven2/org/junit/jupiter/junit-jupiter-params/5.10.2/junit-jupiter-params-5.10.2.jar to /root/.gradle/.tmp/gradle_download9772577954023242272bin
+Downloading https://repo.maven.apache.org/maven2/org/bouncycastle/bcutil-jdk18on/1.78/bcutil-jdk18on-1.78.jar to /root/.gradle/.tmp/gradle_download15205741731487394661bin
+Downloading https://repo.maven.apache.org/maven2/org/junit/jupiter/junit-jupiter-api/5.10.2/junit-jupiter-api-5.10.2.jar to /root/.gradle/.tmp/gradle_download6315696051259649165bin
+Downloading https://repo.maven.apache.org/maven2/org/bouncycastle/bcprov-jdk18on/1.78/bcprov-jdk18on-1.78.jar to /root/.gradle/.tmp/gradle_download18103757728666886633bin
+Downloading https://repo.maven.apache.org/maven2/org/bouncycastle/bcpkix-jdk18on/1.78/bcpkix-jdk18on-1.78.jar to /root/.gradle/.tmp/gradle_download7289489852170777767bin
+Downloading https://repo.maven.apache.org/maven2/org/junit/jupiter/junit-jupiter/5.10.2/junit-jupiter-5.10.2.jar to /root/.gradle/.tmp/gradle_download15009185466707817475bin
+Downloading https://repo.maven.apache.org/maven2/org/junit/platform/junit-platform-commons/1.10.2/junit-platform-commons-1.10.2.jar to /root/.gradle/.tmp/gradle_download16562189956384399044bin
+Downloading https://repo.maven.apache.org/maven2/io/grpc/grpc-stub/1.63.0/grpc-stub-1.63.0.jar to /root/.gradle/.tmp/gradle_download3804838461819107963bin
+Downloading https://repo.maven.apache.org/maven2/io/grpc/grpc-protobuf/1.63.0/grpc-protobuf-1.63.0.jar to /root/.gradle/.tmp/gradle_download13449242221179059683bin
+Downloading https://repo.maven.apache.org/maven2/io/grpc/grpc-api/1.63.0/grpc-api-1.63.0.jar to /root/.gradle/.tmp/gradle_download955883945768172431bin
+Downloading https://repo.maven.apache.org/maven2/com/google/api/grpc/proto-google-common-protos/2.29.0/proto-google-common-protos-2.29.0.jar to /root/.gradle/.tmp/gradle_download13157106880896245081bin
+Downloading https://repo.maven.apache.org/maven2/com/google/guava/guava/32.1.3-jre/guava-32.1.3-jre.jar to /root/.gradle/.tmp/gradle_download13421705052112757377bin
+Downloading https://repo.maven.apache.org/maven2/com/google/protobuf/protobuf-java/3.25.1/protobuf-java-3.25.1.jar to /root/.gradle/.tmp/gradle_download8653433184384084550bin
+Downloading https://repo.maven.apache.org/maven2/org/opentest4j/opentest4j/1.3.0/opentest4j-1.3.0.jar to /root/.gradle/.tmp/gradle_download13833268241923853823bin
+Downloading https://repo.maven.apache.org/maven2/org/apiguardian/apiguardian-api/1.1.2/apiguardian-api-1.1.2.jar to /root/.gradle/.tmp/gradle_download9018929956325775369bin
+Downloading https://repo.maven.apache.org/maven2/org/hyperledger/fabric/fabric-gateway/1.5.1/fabric-gateway-1.5.1.jar to /root/.gradle/.tmp/gradle_download1641483075369503656bin
+Downloading https://repo.maven.apache.org/maven2/com/google/errorprone/error_prone_annotations/2.23.0/error_prone_annotations-2.23.0.jar to /root/.gradle/.tmp/gradle_download11229924515968753483bin
+Downloading https://repo.maven.apache.org/maven2/org/checkerframework/checker-qual/3.37.0/checker-qual-3.37.0.jar to /root/.gradle/.tmp/gradle_download6525582742081111236bin
+Caching disabled for task ':compileTestJava' because:
+  Build cache is disabled
+Task ':compileTestJava' is not up-to-date because:
+  No history is available.
+The input changes require a full rebuild for incremental task ':compileTestJava'.
+Compilation mode: in-process compilation
+Full recompilation is required because no incremental change information is available. This is usually caused by clean builds or changing compiler arguments.
+Compiling with toolchain '/opt/java/openjdk'.
+Compiling with JDK Java compiler API.
+Class dependency analysis for incremental compilation took 0.129 secs.
+Created classpath snapshot for incremental compilation in 3.902 secs.
+Resolve mutations for :processTestResources (Thread[#64,Execution worker,5,main]) started.
+:processTestResources (Thread[#64,Execution worker,5,main]) started.
+
+> Task :processTestResources NO-SOURCE
+Skipping task ':processTestResources' as it has no source files and no previous output files.
+Resolve mutations for :testClasses (Thread[#64,Execution worker,5,main]) started.
+:testClasses (Thread[#64,Execution worker,5,main]) started.
+
+> Task :testClasses
+Skipping task ':testClasses' as it has no actions.
+Resolve mutations for :test (Thread[#64,Execution worker,5,main]) started.
+:test (Thread[#64,Execution worker,5,main]) started.
+
+> Task :test
+Downloading https://repo.maven.apache.org/maven2/io/grpc/grpc-netty-shaded/1.62.2/grpc-netty-shaded-1.62.2.pom to /root/.gradle/.tmp/gradle_download4590540360643727751bin
+Downloading https://repo.maven.apache.org/maven2/org/junit/jupiter/junit-jupiter-engine/5.10.2/junit-jupiter-engine-5.10.2.pom to /root/.gradle/.tmp/gradle_download2500135782489577613bin
+Downloading https://repo.maven.apache.org/maven2/org/junit/jupiter/junit-jupiter-engine/5.10.2/junit-jupiter-engine-5.10.2.module to /root/.gradle/.tmp/gradle_download13936778038548576468bin
+Downloading https://repo.maven.apache.org/maven2/io/grpc/grpc-api/1.62.2/grpc-api-1.62.2.pom to /root/.gradle/.tmp/gradle_download9670777629877325886bin
+Downloading https://repo.maven.apache.org/maven2/io/grpc/grpc-util/1.62.2/grpc-util-1.62.2.pom to /root/.gradle/.tmp/gradle_download11058450179358693849bin
+Downloading https://repo.maven.apache.org/maven2/io/grpc/grpc-core/1.62.2/grpc-core-1.62.2.pom to /root/.gradle/.tmp/gradle_download3429007545214977633bin
+Downloading https://repo.maven.apache.org/maven2/io/grpc/grpc-protobuf-lite/1.63.0/grpc-protobuf-lite-1.63.0.pom to /root/.gradle/.tmp/gradle_download1090279907502395614bin
+Downloading https://repo.maven.apache.org/maven2/org/junit/platform/junit-platform-launcher/1.10.2/junit-platform-launcher-1.10.2.pom to /root/.gradle/.tmp/gradle_download3384948078685911968bin
+Downloading https://repo.maven.apache.org/maven2/org/junit/platform/junit-platform-launcher/1.10.2/junit-platform-launcher-1.10.2.module to /root/.gradle/.tmp/gradle_download3362375559640738994bin
+Downloading https://repo.maven.apache.org/maven2/io/grpc/grpc-context/1.62.2/grpc-context-1.62.2.pom to /root/.gradle/.tmp/gradle_download51485541736017194bin
+Downloading https://repo.maven.apache.org/maven2/org/junit/platform/junit-platform-engine/1.10.2/junit-platform-engine-1.10.2.pom to /root/.gradle/.tmp/gradle_download7916590406162273349bin
+Downloading https://repo.maven.apache.org/maven2/org/junit/platform/junit-platform-engine/1.10.2/junit-platform-engine-1.10.2.module to /root/.gradle/.tmp/gradle_download10985703127121741601bin
+Downloading https://repo.maven.apache.org/maven2/io/grpc/grpc-netty-shaded/1.62.2/grpc-netty-shaded-1.62.2.jar to /root/.gradle/.tmp/gradle_download7268153896937699035bin
+Downloading https://repo.maven.apache.org/maven2/org/junit/jupiter/junit-jupiter-engine/5.10.2/junit-jupiter-engine-5.10.2.jar to /root/.gradle/.tmp/gradle_download2861387257888504033bin
+Downloading https://repo.maven.apache.org/maven2/org/junit/platform/junit-platform-engine/1.10.2/junit-platform-engine-1.10.2.jar to /root/.gradle/.tmp/gradle_download4475756210271682986bin
+Downloading https://repo.maven.apache.org/maven2/io/grpc/grpc-core/1.62.2/grpc-core-1.62.2.jar to /root/.gradle/.tmp/gradle_download7759820747792109791bin
+Downloading https://repo.maven.apache.org/maven2/io/grpc/grpc-context/1.62.2/grpc-context-1.62.2.jar to /root/.gradle/.tmp/gradle_download6618573599785825200bin
+Downloading https://repo.maven.apache.org/maven2/io/grpc/grpc-util/1.62.2/grpc-util-1.62.2.jar to /root/.gradle/.tmp/gradle_download7726544174539228718bin
+Downloading https://repo.maven.apache.org/maven2/io/grpc/grpc-protobuf-lite/1.63.0/grpc-protobuf-lite-1.63.0.jar to /root/.gradle/.tmp/gradle_download15438412546935739993bin
+Downloading https://repo.maven.apache.org/maven2/org/junit/platform/junit-platform-launcher/1.10.2/junit-platform-launcher-1.10.2.jar to /root/.gradle/.tmp/gradle_download12620612906599930377bin
+Caching disabled for task ':test' because:
+  Build cache is disabled
+Task ':test' is not up-to-date because:
+  No history is available.
+Starting process 'Gradle Test Executor 1'. Working directory: /tests Command: /opt/java/openjdk/bin/java -Dorg.gradle.internal.worker.tmpdir=/tests/build/tmp/test/work @/root/.gradle/.tmp/gradle-worker-classpath1436915480087720149txt -Xmx512m -Dfile.encoding=UTF-8 -Duser.country=US -Duser.language=en -Duser.variant -ea worker.org.gradle.process.internal.worker.GradleWorkerMain 'Gradle Test Executor 1'
+Successfully started process 'Gradle Test Executor 1'
+
+Gradle Test Executor 1 started executing tests.
+WARNING: A terminally deprecated method in sun.misc.Unsafe has been called
+WARNING: sun.misc.Unsafe::objectFieldOffset has been called by io.grpc.netty.shaded.io.netty.util.internal.PlatformDependent0$4 (file:/root/.gradle/caches/modules-2/files-2.1/io.grpc/grpc-netty-shaded/1.62.2/a714ecbed7be23639d861015125b6b921481bc97/grpc-netty-shaded-1.62.2.jar)
+WARNING: Please consider reporting this to the maintainers of class io.grpc.netty.shaded.io.netty.util.internal.PlatformDependent0$4
+WARNING: sun.misc.Unsafe::objectFieldOffset will be removed in a future release
+WARNING: A restricted method in java.lang.System has been called
+WARNING: java.lang.System::loadLibrary has been called by io.grpc.netty.shaded.io.netty.util.internal.NativeLibraryUtil in an unnamed module (file:/root/.gradle/caches/modules-2/files-2.1/io.grpc/grpc-netty-shaded/1.62.2/a714ecbed7be23639d861015125b6b921481bc97/grpc-netty-shaded-1.62.2.jar)
+WARNING: Use --enable-native-access=ALL-UNNAMED to avoid a warning for callers in this module
+WARNING: Restricted methods will be blocked in a future release unless native access is enabled
+
+Gradle Test Executor 1 finished executing tests.
+
+> Task :test
+Generating HTML test report...
+Finished generating test html results (0.137 secs) into: /tests/build/reports/tests/test
+Finished generating test XML results (0.038 secs) into: /tests/build/test-results/test
+
+[Incubating] Problems report is available at: file:///tests/build/reports/problems/problems-report.html
+
+Deprecated Gradle features were used in this build, making it incompatible with Gradle 10.
+
+You can use '--warning-mode all' to show the individual deprecation warnings and determine if they come from your own scripts or plugins.
+
+For more on this, please refer to https://docs.gradle.org/9.5.1/userguide/command_line_interface.html#sec:command_line_warnings in the Gradle documentation.
+
+BUILD SUCCESSFUL in 1m 46s
+2 actionable tasks: 2 executed
+Some of the file system contents retained in the virtual file system are on file systems that Gradle doesn't support watching. The relevant state was discarded to ensure changes to these locations are properly detected. You can override this by explicitly enabling file system watching.
+Consider enabling configuration cache to speed up this build: https://docs.gradle.org/9.5.1/userguide/configuration_cache_enabling.html

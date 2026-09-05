@@ -1,0 +1,23 @@
+﻿# Reseau Fabric du PoC - conteneurs actifs
+# Genere le 2026-09-03 22:02:45 par capture-evidence.ps1
+
+NAMES                       IMAGE                            STATUS          PORTS
+dvp-bankb-ccaas             hyperledger/fabric-javaenv:2.5   Up 7 minutes    
+dvp-banka-ccaas             hyperledger/fabric-javaenv:2.5   Up 7 minutes    
+dvp-centralbank-ccaas       hyperledger/fabric-javaenv:2.5   Up 7 minutes    
+wcbdc-bankb-ccaas           hyperledger/fabric-javaenv:2.5   Up 8 minutes    
+wcbdc-banka-ccaas           hyperledger/fabric-javaenv:2.5   Up 8 minutes    
+wcbdc-centralbank-ccaas     hyperledger/fabric-javaenv:2.5   Up 8 minutes    
+bond-bankb-ccaas            hyperledger/fabric-javaenv:2.5   Up 8 minutes    
+bond-banka-ccaas            hyperledger/fabric-javaenv:2.5   Up 8 minutes    
+bond-csd-ccaas              hyperledger/fabric-javaenv:2.5   Up 8 minutes    
+orderer.infra.dvp.poc       hyperledger/fabric-orderer:2.5   Up 33 minutes   0.0.0.0:7050->7050/tcp, [::]:7050->7050/tcp, 0.0.0.0:7053->7053/tcp, [::]:7053->7053/tcp
+peer0.banka.dvp.poc         hyperledger/fabric-peer:2.5      Up 33 minutes   0.0.0.0:9051->9051/tcp, [::]:9051->9051/tcp
+peer0.csd.dvp.poc           hyperledger/fabric-peer:2.5      Up 33 minutes   0.0.0.0:8051->8051/tcp, [::]:8051->8051/tcp
+dvp-cli                     hyperledger/fabric-tools:2.5     Up 33 minutes   
+peer0.centralbank.dvp.poc   hyperledger/fabric-peer:2.5      Up 33 minutes   0.0.0.0:7051->7051/tcp, [::]:7051->7051/tcp
+peer0.bankb.dvp.poc         hyperledger/fabric-peer:2.5      Up 33 minutes   0.0.0.0:10051->10051/tcp, [::]:10051->10051/tcp
+peer0.supervisor.dvp.poc    hyperledger/fabric-peer:2.5      Up 33 minutes   0.0.0.0:11051->11051/tcp, [::]:11051->11051/tcp
+
+
+# Total conteneurs actifs : 16

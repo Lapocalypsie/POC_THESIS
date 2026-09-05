@@ -1,0 +1,19 @@
+﻿# Definitions de chaincode engagees sur le canal dvp-channel
+# Vue depuis le peer de la banque centrale (CentralBankMSP)
+
+Committed chaincode definitions on channel 'dvp-channel':
+Name: bond, Version: 1.1, Sequence: 2, Endorsement Plugin: escc, Validation Plugin: vscc
+Name: dvp, Version: 1.0, Sequence: 1, Endorsement Plugin: escc, Validation Plugin: vscc
+Name: wcbdc, Version: 1.1, Sequence: 2, Endorsement Plugin: escc, Validation Plugin: vscc
+
+
+# Canaux vus par ce peer
+2026-09-03 20:02:46.352 UTC 0001 INFO [channelCmd] InitCmdFactory -> Endorser and orderer connections initialized
+Channels peers has joined:
+dvp-channel
+
+# Note de capture : `peer channel list` ecrit sa banniere d'information sur stderr.
+# PowerShell rend ce flux comme un enregistrement d'erreur (NativeCommandError).
+# Cet enregistrement et les sequences d'echappement ANSI ont ete retires de la
+# capture ; la commande a bien reussi, le canal dvp-channel est joint. La sortie
+# brute est reproductible avec network/scripts/capture-evidence.ps1.

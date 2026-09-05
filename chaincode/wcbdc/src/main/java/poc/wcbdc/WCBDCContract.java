@@ -13,7 +13,7 @@ import java.nio.charset.StandardCharsets;
 
 /**
  * Jambe cash de la variante B2 : wCBDC natif, monnaie de banque centrale sous
- * forme de token (Ch. 7.2). Realise les flux C2 (mint/burn, operation reservee
+ * forme de token (section 4.5.2). Realise les flux C2 (mint/burn, operation reservee
  * a la banque centrale, R14) et O2 (transfert cash au sein du swap atomique).
  *
  * Un compte par organisation (MSP), cle "wcbdc:acct:<MSPID>".

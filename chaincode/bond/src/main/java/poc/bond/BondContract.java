@@ -11,7 +11,7 @@ import org.hyperledger.fabric.shim.ChaincodeException;
 
 /**
  * Jambe titres de la variante B2 : cycle de vie de l'obligation tokenisee
- * (Ch. 7.2). Realise les flux I1 (enregistrement par l'emetteur) et I2
+ * (section 4.5.2). Realise les flux I1 (enregistrement par l'emetteur) et I2
  * (creation des tokens, reservee au CSD - D2 CSD-as-DLT-node, R06), les
  * transferts entre detenteurs et l'earmark (reservation d'escrow, R09/R10).
  *

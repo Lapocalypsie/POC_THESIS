@@ -1,0 +1,370 @@
+<mxfile host="app.diagrams.net" pages="6">
+  <diagram id="fig31" name="Fig 4.1 - Generic architecture (component types)">
+    <mxGraphModel dx="1200" dy="800" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1200" pageHeight="850" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="n2" value="Participants (type) Submit settlement instructions; hold balances. Subject to eligibility and access control (D4)." style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=14;" vertex="1" parent="1"><mxGeometry x="40" y="380" width="230" height="100" as="geometry" /></mxCell>
+        <mxCell id="n3" value="Compliance &amp; control (type) Enforce eligibility, holding limits and policy. Pre-validate; cannot itself settle." style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=15;" vertex="1" parent="1"><mxGeometry x="360" y="140" width="270" height="90" as="geometry" /></mxCell>
+        <mxCell id="n4" value="COORDINATION MECHANISM (type) Enforces the DvP guarantee across the two legs. The atomicity mechanism resides here (D3) - where the candidate architectures differ." style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;fontSize=14;fontStyle=1;" vertex="1" parent="1"><mxGeometry x="360" y="380" width="270" height="120" as="geometry" /></mxCell>
+        <mxCell id="n5" value="Securities domain (type) Holds and transfers the asset leg; records ownership. Cannot move cash; acts only on a settlement instruction." style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=15;" vertex="1" parent="1"><mxGeometry x="760" y="250" width="280" height="100" as="geometry" /></mxCell>
+        <mxCell id="n6" value="Cash domain (type) Holds and transfers central bank money with finality. Location and finality anchor not fixed (D1)." style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=17;" vertex="1" parent="1"><mxGeometry x="760" y="520" width="280" height="100" as="geometry" /></mxCell>
+        <mxCell id="n7" value="CENTRAL BANK (individual component, not a type) Issues wCBDC, sets access, may intervene or suspend; may decline to operate on a third-party ledger." style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=13;" vertex="1" parent="1"><mxGeometry x="760" y="60" width="280" height="100" as="geometry" /></mxCell>
+        <mxCell id="e8" value="Settlement instruction (stimulus)" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;fontSize=11;jettySize=auto;orthogonalLoop=1;" edge="1" parent="1" source="n2" target="n4">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e9" value="Eligibility &amp; policy checks" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;fontSize=11;jettySize=auto;orthogonalLoop=1;" edge="1" parent="1" source="n3" target="n4">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e10" value="Lock / transfer asset leg" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;fontSize=11;jettySize=auto;orthogonalLoop=1;" edge="1" parent="1" source="n4" target="n5">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e11" value="Trigger / confirm cash leg" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;fontSize=11;jettySize=auto;orthogonalLoop=1;" edge="1" parent="1" source="n4" target="n6">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e12" value="Issues wCBDC; controls access" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;fontSize=11;jettySize=auto;orthogonalLoop=1;strokeColor=#82b366;fontColor=#4d7a4d;" edge="1" parent="1" source="n7" target="n6">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="1100" y="160" />
+              <mxPoint x="1100" y="520" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e13" value="Intervention / suspension rights" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;fontSize=11;jettySize=auto;orthogonalLoop=1;strokeColor=#82b366;fontColor=#4d7a4d;" edge="1" parent="1" source="n7" target="n4">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="n14" value="System-level phenomenon (mechanism, 3.3): a settled DvP - the security leg settles if and only if the cash leg settles, with finality - or a safe failure. The requirements R constrain this behaviour; they do not fix how the coordination mechanism enforces it (parameters D1-D5; contextual factors)." style="shape=note;whiteSpace=wrap;html=1;fillColor=#fffde7;strokeColor=#b8a800;fontSize=16;align=left;verticalAlign=top;" vertex="1" parent="1"><mxGeometry x="40" y="660" width="590" height="120" as="geometry" /></mxCell>
+        <mxCell id="n15" value="Boxes are component TYPES (Table 3.3); the central bank is an individual component. Arrows are interactions, not message flows - concrete flows appear only with the variants (Section 4.5)." style="shape=note;whiteSpace=wrap;html=1;fillColor=#fffde7;strokeColor=#b8a800;fontSize=14;align=left;verticalAlign=top;" vertex="1" parent="1"><mxGeometry x="700" y="680" width="380" height="100" as="geometry" /></mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+  <diagram id="fig61" name="Fig 4.2 - Six-layer reference framework">
+    <mxGraphModel dx="1200" dy="800" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1400" pageHeight="950" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="n2" value="L1 - Legal &amp; governance:  legal basis of register, token and finality; role allocation; enforceable central-bank control  |  R01, R02, R14  |  P1, P2, P8, P11, P17, P18" style="rounded=0;whiteSpace=wrap;html=1;fontSize=20;align=left;spacingLeft=12;fillColor=#dae8fc;strokeColor=#6c8ebf;" vertex="1" parent="1"><mxGeometry x="80" y="60" width="900" height="80" as="geometry" /></mxCell>
+        <mxCell id="n3" value="L2 - Participation &amp; access:  admission, eligibility, KYC/AML, tiering; compliance-as-code with human override  |  R03, R16  |  P18, P19, P2, P3, P17   (R16 code-governance facet reaches L5)" style="rounded=0;whiteSpace=wrap;html=1;fontSize=17;align=left;spacingLeft=12;fillColor=#dae8fc;strokeColor=#6c8ebf;" vertex="1" parent="1"><mxGeometry x="80" y="160" width="900" height="80" as="geometry" /></mxCell>
+        <mxCell id="n4" value="L3 - COORDINATED DvP SETTLEMENT ENGINE:  settlement asset; DvP mechanism; authoritative record; intraday liquidity; failure handling; pattern choice  |  R04, R05, R06, R09, R10, R13  |  P9, P12, P8, P11, P7, P13, P20 (+P21 arb.)" style="rounded=0;whiteSpace=wrap;html=1;fontSize=20;align=left;spacingLeft=12;fillColor=#ffe6cc;strokeColor=#d79b00;fontStyle=1;" vertex="1" parent="1"><mxGeometry x="80" y="260" width="900" height="90" as="geometry" /></mxCell>
+        <mxCell id="n5" value="L4 - Interoperability:  links to RTGS/TARGET, CSDs, payment and messaging systems; standards  |  R07, R12  |  P20, P22   (R13&#39;s arbitration engages L4)" style="rounded=0;whiteSpace=wrap;html=1;fontSize=22;align=left;spacingLeft=12;fillColor=#dae8fc;strokeColor=#6c8ebf;" vertex="1" parent="1"><mxGeometry x="80" y="370" width="900" height="80" as="geometry" /></mxCell>
+        <mxCell id="n6" value="L5 - Operations &amp; resilience:  operational controls, resilience, auditability; confidentiality vs supervision  |  R08, R11  |  P3, P17, P18" style="rounded=0;whiteSpace=wrap;html=1;fontSize=24;align=left;spacingLeft=12;fillColor=#dae8fc;strokeColor=#6c8ebf;" vertex="1" parent="1"><mxGeometry x="80" y="470" width="900" height="80" as="geometry" /></mxCell>
+        <mxCell id="n7" value="L6 - Transition &amp; coexistence:  fragmentation limits; coexistence rules; migration roadmap  |  R15  |  P7, P9, P15, P20" style="rounded=0;whiteSpace=wrap;html=1;fontSize=26;align=left;spacingLeft=12;fillColor=#dae8fc;strokeColor=#6c8ebf;" vertex="1" parent="1"><mxGeometry x="80" y="570" width="900" height="80" as="geometry" /></mxCell>
+        <mxCell id="n8" value="Only L3 admits structurally distinct instantiations (3.3): the atomicity mechanism lives here. B1 - trigger (coordinator; rollback on confirmed rejection, recovery on timeout)&#xa;B2 - platform atomic commit&#xa;B3 - HTLC (hash-lock + time-lock)&#xa;&#xa;All other layers are stable across admissible architectures; what varies there are derived surfaces (supervisory interfaces, reconciliation), not mechanisms (4.3)." style="shape=note;whiteSpace=wrap;html=1;fillColor=#fffde7;strokeColor=#b8a800;fontSize=18;align=left;verticalAlign=top;" vertex="1" parent="1"><mxGeometry x="1030" y="260" width="300" height="430" as="geometry" /></mxCell>
+        <mxCell id="e9" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;fontSize=11;jettySize=auto;orthogonalLoop=1;dashed=1;" edge="1" parent="1" source="n4" target="n8">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="n10" value="Each of the sixteen requirements is anchored to exactly one primary layer (Table 4.4); the anchoring extends the traceability of the requirement set derived in Chapter 4." style="shape=note;whiteSpace=wrap;html=1;fillColor=#fffde7;strokeColor=#b8a800;fontSize=18;align=left;verticalAlign=top;" vertex="1" parent="1"><mxGeometry x="80" y="720" width="900" height="60" as="geometry" /></mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+  <diagram id="fig6x" name="Reading aid - How the six layers work together">
+    <mxGraphModel dx="1400" dy="900" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1500" pageHeight="1000" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="t1" value="The six layers are SEPARATIONS OF CONCERNS in one arrangement - not a pipeline. Nothing &#39;flows&#39; from L1 to L2 to L3. Every admissible architecture must instantiate ALL SIX (each layer carries requirements of R); only L3 varies structurally between B1 / B2 / B3." style="text;html=1;strokeColor=none;fillColor=#fff2cc;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=1;fontSize=20;fontStyle=1;spacing=8;" vertex="1" parent="1"><mxGeometry x="40" y="20" width="1420" height="70" as="geometry" /></mxCell>
+        <mxCell id="wrong" value="WRONG reading (pipeline):&#xa;L1 → L2 → L3 → L4 → L5 → L6&#xa;&#xa;A layer does not &#39;feed&#39; the next one." style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;fontSize=15;dashed=1;" vertex="1" parent="1"><mxGeometry x="40" y="120" width="300" height="110" as="geometry" /></mxCell>
+        <mxCell id="right" value="RIGHT reading (concerns):&#xa;L1 frames · L2 gates · L3 executes&#xa;L4 connects · L5 observes · L6 plans" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=16;fontStyle=1;" vertex="1" parent="1"><mxGeometry x="40" y="250" width="300" height="100" as="geometry" /></mxCell>
+        <mxCell id="L1" value="L1 - LEGAL &amp; GOVERNANCE (the constitution). Frames everything inside: the rulebook constitutes the authority that L2 enforces, L3 executes under, and L5 supervises with. R01 R02 R14" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;fontSize=28;verticalAlign=top;align=left;spacing=8;fontStyle=1;" vertex="1" parent="1"><mxGeometry x="380" y="120" width="1080" height="620" as="geometry" /></mxCell>
+        <mxCell id="L2" value="L2 - PARTICIPATION &amp; ACCESS (the door)&#xa;Who may hold, instruct, receive. Eligibility, KYC/AML, tiering, compliance-as-code. R03 R16" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=16;" vertex="1" parent="1"><mxGeometry x="420" y="330" width="280" height="120" as="geometry" /></mxCell>
+        <mxCell id="L3" value="L3 - SETTLEMENT ENGINE (the engine room)&#xa;The ONLY place settlement executes; the atomicity mechanism lives here.&#xa;R04 R05 R06 R09 R10 R13&#xa;&#xa;THE ONLY LAYER THAT VARIES:&#xa;B1 trigger | B2 platform commit | B3 HTLC" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;fontSize=15;fontStyle=1;" vertex="1" parent="1"><mxGeometry x="790" y="300" width="330" height="180" as="geometry" /></mxCell>
+        <mxCell id="L4" value="L4 - INTEROPERABILITY (the plugs)&#xa;Links L3 to what it does not replace: RTGS / TARGET, CSD, messaging standards. R07 R12" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=15;" vertex="1" parent="1"><mxGeometry x="1180" y="330" width="250" height="120" as="geometry" /></mxCell>
+        <mxCell id="ext" value="EXTERNAL WORLD&#xa;RTGS / TARGET · legacy CSD · payment &amp; messaging systems" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#666666;fontSize=16;dashed=1;" vertex="1" parent="1"><mxGeometry x="1180" y="800" width="250" height="90" as="geometry" /></mxCell>
+        <mxCell id="L5" value="L5 - OPERATIONS &amp; RESILIENCE (the control room)&#xa;Watches and hardens the engine: controls, continuity, audit; confidentiality vs supervision. READ-ONLY toward settlement. R08 R11" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=15;" vertex="1" parent="1"><mxGeometry x="790" y="560" width="330" height="130" as="geometry" /></mxCell>
+        <mxCell id="inst" value="Settlement instruction" style="text;html=1;strokeColor=none;fillColor=none;fontSize=15;fontStyle=2;" vertex="1" parent="1"><mxGeometry x="420" y="240" width="200" height="30" as="geometry" /></mxCell>
+        <mxCell id="e1" value="admitted under L2 rules (precondition)" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;fontSize=12;" edge="1" parent="1" source="L2" target="L3">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e0" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;fontSize=12;" edge="1" parent="1" source="inst" target="L2">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e2" value="serves L3 when a leg or record is off-platform (B1: cash leg; B3: second register)" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;fontSize=12;" edge="1" parent="1" source="L3" target="L4">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e3" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;fontSize=12;" edge="1" parent="1" source="L4" target="ext">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e4" value="observes (read-only)" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;fontSize=12;dashed=1;" edge="1" parent="1" source="L5" target="L3">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="L6" value="L6 - TRANSITION &amp; COEXISTENCE (the calendar). Does not touch transactions at all: it governs how the WHOLE arrangement changes over time - fragmentation limits, coexistence with legacy, migration roadmap (e.g. B1 now, B2 later). R15" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=18;verticalAlign=middle;align=left;spacing=8;" vertex="1" parent="1"><mxGeometry x="380" y="770" width="760" height="90" as="geometry" /></mxCell>
+        <mxCell id="note" value="One arrangement = one instantiation of each layer (six aspects of the same system, not six subsystems in sequence). A single transaction: enters through L2, executes in L3, may reach outside through L4, is observed by L5 - all of it with the legal force L1 gives, on the timeline L6 plans." style="text;html=1;strokeColor=none;fillColor=#fff2cc;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=1;fontSize=18;spacing=8;" vertex="1" parent="1"><mxGeometry x="40" y="890" width="1420" height="80" as="geometry" /></mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+  <diagram id="v4fig71" name="Fig 4.3 - Variant B1 Trigger (cash off-ledger)">
+    <mxGraphModel dx="2189" dy="310" grid="0" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1600" pageHeight="1150" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="v4fig71_cb" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=23;" value="Central bank control plane (L1/L3)" vertex="1"><mxGeometry height="60" width="440" x="60" y="40" as="geometry" /></mxCell>
+        <mxCell id="v4fig71_sup" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;fontSize=18;" value="Regulatory &amp; supervisory plane (L5) - read-only" vertex="1"><mxGeometry height="60" width="440" x="1100" y="40" as="geometry" /></mxCell>
+        <mxCell id="v4fig71_iss" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=15;" value="Issuer&#xa;(issuance / minting service)" vertex="1"><mxGeometry height="70" width="210" x="60" y="200" as="geometry" /></mxCell>
+        <mxCell id="v4fig71_par" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=20;" value="Participants (OMS)&#xa;cosigned settlement instructions" vertex="1"><mxGeometry height="90" width="210" x="60" y="330" as="geometry" /></mxCell>
+        <mxCell id="v4fig71_plat" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#F8CECC;strokeColor=#666666;fontSize=28;fontStyle=1;verticalAlign=top;align=left;spacingLeft=8;spacingTop=4;" value="Securities DLT platform (permissioned) - MIRROR side" vertex="1"><mxGeometry height="600" width="660" x="354" y="169" as="geometry" /></mxCell>
+        <mxCell id="v4fig71_tok" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=18;" value="Security token contract&#xa;MIRROR of the CSD record" vertex="1"><mxGeometry height="90" width="240" x="420" y="260" as="geometry" /></mxCell>
+        <mxCell id="v4fig71_orc" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;fontSize=16;fontStyle=1;" value="TRIGGER ORCHESTRATOR - ACTIVE&#xa;lock &gt; trigger &gt; confirm &gt; release / rollback&#xa;Timeout manager: T_lock / T_conf -&gt; RECOVERY (I4c)&#xa;NEVER releases on expiry alone" vertex="1"><mxGeometry height="180" width="270" x="740" y="240" as="geometry" /></mxCell>
+        <mxCell id="v4fig71_bus" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=15;" value="DLT event bus&#xa;TokensLocked / Released / Transferred" vertex="1"><mxGeometry height="70" width="270" x="740" y="560" as="geometry" /></mxCell>
+        <mxCell id="v4fig71_in1" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#999999;fontSize=12;dashed=1;fontColor=#666666;" value="On-ledger DvP contract&#xa;INACTIVE (B2&#39;s mechanism)" vertex="1"><mxGeometry height="60" width="180" x="420" y="660" as="geometry" /></mxCell>
+        <mxCell id="v4fig71_in2" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#999999;fontSize=12;dashed=1;fontColor=#666666;" value="HTLC pair&#xa;INACTIVE (B3&#39;s mechanism)" vertex="1"><mxGeometry height="60" width="180" x="620" y="660" as="geometry" /></mxCell>
+        <mxCell id="v4fig71_in3" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#999999;fontSize=12;dashed=1;fontColor=#666666;" value="wCBDC contract - ABSENT&#xa;(this absence defines B1 vs B2)" vertex="1"><mxGeometry height="60" width="190" x="820" y="660" as="geometry" /></mxCell>
+        <mxCell id="v4fig71_rtgs" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=19;" value="RTGS - off-ledger (T2 / SIC)&#xa;Cash leg NEVER leaves the RTGS: central bank money by construction (R04); existing finality designation (R01)" vertex="1"><mxGeometry height="140" width="360" x="1180" y="240" as="geometry" /></mxCell>
+        <mxCell id="v4fig71_csd" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=none;strokeColor=#666666;fontSize=28;fontStyle=1;verticalAlign=top;align=left;spacingLeft=8;spacingTop=4;" value="CSD / Notary (L1/L3) - RECORD side" vertex="1"><mxGeometry height="220" width="280" x="60" y="520" as="geometry" /></mxCell>
+        <mxCell id="v4fig71_gold" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;fontSize=17;fontStyle=1;" value="AUTHORITATIVE REGISTER&#xa;GOLDEN RECORD (off-ledger; D2: CSD primary)" vertex="1"><mxGeometry height="80" width="240" x="80" y="560" as="geometry" /></mxCell>
+        <mxCell id="v4fig71_inv" parent="1" style="text;html=1;strokeColor=#d6b656;fillColor=#fff2cc;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=1;fontSize=15;spacing=8;" value="WHAT GUARANTEES &#39;both legs or neither&#39; IN B1? A step-by-step protocol run by the orchestrator: (1) freeze the seller&#39;s bonds (I4a); (2) ask the RTGS to pay (T1); (3) wait for its answer (T2); (4) answer positive (ACSC): hand the bonds to the buyer (I4b); answer negative (RJCT): unfreeze and return them (I4b). If no answer arrives before the timers expire, the instruction moves to RECOVERY (I4c) and the orchestrator asks the RTGS what happened (T3 pacs.028, camt.053 as fallback) - it never unfreezes on expiry alone, because the cash may already be final. Every path ends with both legs done or both undone.&#xa;WHAT IT COSTS: a moment exists where bonds are frozen but no cash has moved (that moment does not exist in B2); settlement depends on messages between two systems (ISO 20022 in the critical path, R07/R12); central bank and supervisor each work on TWO surfaces (R11, R14).&#xa;WHAT PROVES IT: Helvetia I synchronised PoC, Eurosystem 2024 trials, Pontes [13][17][23]." vertex="1"><mxGeometry height="150" width="1480" x="60" y="800" as="geometry" /></mxCell>
+        <mxCell id="v4fig71_e2" edge="1" parent="1" source="v4fig71_iss" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;fontSize=11;labelBackgroundColor=#ffffff;strokeColor=#999999;strokeWidth=1;jettySize=auto;exitX=0;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" target="v4fig71_gold" value="I1 issuance registration">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="40" y="235" />
+              <mxPoint x="40" y="600" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="v4fig71_e3" edge="1" parent="1" source="v4fig71_gold" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;fontSize=11;labelBackgroundColor=#ffffff;strokeColor=#999999;strokeWidth=1;jettySize=auto;exitX=1;exitY=0.3;exitDx=0;exitDy=0;entryX=0;entryY=0.3;entryDx=0;entryDy=0;" target="v4fig71_tok" value="I2 token creation (CSD endorsement)">
+          <mxGeometry relative="1" x="-0.0729" y="70" as="geometry">
+            <mxPoint as="offset" />
+            <Array as="points">
+              <mxPoint x="370" y="584" />
+              <mxPoint x="370" y="287" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="v4fig71_e4" edge="1" parent="1" source="v4fig71_par" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;fontSize=11;labelBackgroundColor=#ffffff;strokeColor=#000000;strokeWidth=1;jettySize=auto;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" target="v4fig71_orc" value="I3 transfer instruction">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="310" y="375" />
+              <mxPoint x="310" y="420" />
+              <mxPoint x="700" y="420" />
+              <mxPoint x="700" y="397.08" />
+              <mxPoint x="718.5" y="397.08" />
+              <mxPoint x="718.5" y="330" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="v4fig71_e5" edge="1" parent="1" source="v4fig71_orc" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;fontSize=11;labelBackgroundColor=#ffffff;strokeColor=#000000;strokeWidth=1;jettySize=auto;exitX=0;exitY=0.25;exitDx=0;exitDy=0;entryX=0.992;entryY=0.292;entryDx=0;entryDy=0;entryPerimeter=0;" target="v4fig71_tok" value="I4a lock securities (starts T_lock)">
+          <mxGeometry relative="1" x="-0.5018" y="-15" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="v4fig71_e6" edge="1" parent="1" source="v4fig71_orc" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;fontSize=11;labelBackgroundColor=#ffffff;strokeColor=#000000;strokeWidth=1;jettySize=auto;exitX=0.005;exitY=0.414;exitDx=0;exitDy=0;entryX=1;entryY=0.94;entryDx=0;entryDy=0;exitPerimeter=0;" target="v4fig71_tok" value="I4b release (ACSC)  |  rollback (RJCT only)&#xa;I4c recovery on timeout expiry">
+          <mxGeometry relative="1" x="0.8551" y="22" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="v4fig71_e7" edge="1" parent="1" source="v4fig71_orc" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;fontSize=11;labelBackgroundColor=#ffffff;strokeColor=#d79b00;strokeWidth=2;jettySize=auto;exitX=1;exitY=0.25;exitDx=0;exitDy=0;entryX=0;entryY=0.25;entryDx=0;entryDy=0;" target="v4fig71_rtgs" value="T1 pacs.009 cash-leg trigger (starts T_conf)">
+          <mxGeometry relative="1" x="0.1765" y="15" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="v4fig71_e8" edge="1" parent="1" source="v4fig71_rtgs" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;fontSize=11;labelBackgroundColor=#ffffff;strokeColor=#d79b00;strokeWidth=2;jettySize=auto;exitX=0;exitY=0.75;exitDx=0;exitDy=0;entryX=1;entryY=0.75;entryDx=0;entryDy=0;" target="v4fig71_orc" value="T2 pacs.002 - ACSC | RJCT">
+          <mxGeometry relative="1" x="-0.0588" y="15" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="v4fig71_e9" edge="1" parent="1" source="v4fig71_orc" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;fontSize=11;labelBackgroundColor=#ffffff;strokeColor=#999999;strokeWidth=1;jettySize=auto;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" target="v4fig71_bus" value="settlement events">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="v4fig71_e10" edge="1" parent="1" source="v4fig71_tok" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;fontSize=11;labelBackgroundColor=#ffffff;strokeColor=#333333;strokeWidth=1;jettySize=auto;dashed=1;startArrow=classic;startFill=1;exitX=0.25;exitY=1;exitDx=0;exitDy=0;entryX=0.67;entryY=0;entryDx=0;entryDy=0;" target="v4fig71_gold" value="PERMANENT reconciliation - record vs mirror (B1-specific)">
+          <mxGeometry relative="1" x="-0.1985" y="10" as="geometry">
+            <mxPoint as="offset" />
+            <Array as="points">
+              <mxPoint x="480" y="500" />
+              <mxPoint x="240" y="500" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="v4fig71_e11" edge="1" parent="1" source="v4fig71_cb" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;fontSize=11;labelBackgroundColor=#ffffff;strokeColor=#82b366;strokeWidth=1;jettySize=auto;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" target="v4fig71_orc" value="C1 stop-settlement (scoped)">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="280" y="140" />
+              <mxPoint x="875" y="140" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="v4fig71_e12" edge="1" parent="1" source="v4fig71_cb" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;fontSize=11;labelBackgroundColor=#ffffff;strokeColor=#82b366;strokeWidth=1;jettySize=auto;exitX=0.9;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" target="v4fig71_rtgs" value="C2 RTGS &amp; liquidity operation">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="456" y="125" />
+              <mxPoint x="1360" y="125" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="v4fig71_e13" edge="1" parent="1" source="v4fig71_sup" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;fontSize=11;labelBackgroundColor=#ffffff;strokeColor=#9673a6;strokeWidth=1;jettySize=auto;dashed=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=1;entryY=0.5;entryDx=0;entryDy=0;" target="v4fig71_bus" value="S1 DLT event observation (read-only)">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="1565" y="70" />
+              <mxPoint x="1565" y="595" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="v4fig71_e14" edge="1" parent="1" source="v4fig71_sup" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;fontSize=11;labelBackgroundColor=#ffffff;strokeColor=#9673a6;strokeWidth=1;jettySize=auto;dashed=1;exitX=0.8;exitY=1;exitDx=0;exitDy=0;entryX=0.75;entryY=0;entryDx=0;entryDy=0;" target="v4fig71_rtgs" value="S2 pacs message observation">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="1452" y="180" />
+              <mxPoint x="1450" y="180" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+  <diagram id="v4fig72" name="Fig 4.4 - Variant B2 Integrated on-ledger (platform commit)">
+    <mxGraphModel dx="1768" dy="929" grid="0" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1600" pageHeight="1050" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="v4fig72_cb" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=23;" value="Central bank control plane (L1/L3)" vertex="1"><mxGeometry height="60" width="440" x="60" y="40" as="geometry" /></mxCell>
+        <mxCell id="v4fig72_sup" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;fontSize=18;" value="Regulatory &amp; supervisory plane (L5) - read-only" vertex="1"><mxGeometry height="60" width="440" x="1100" y="40" as="geometry" /></mxCell>
+        <mxCell id="v4fig72_iss" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=15;" value="Issuer&#xa;(issuance / minting service)" vertex="1"><mxGeometry height="70" width="210" x="60" y="200" as="geometry" /></mxCell>
+        <mxCell id="v4fig72_par" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=20;" value="Participants (OMS)&#xa;cosigned settlement instructions" vertex="1"><mxGeometry height="90" width="210" x="60" y="340" as="geometry" /></mxCell>
+        <mxCell id="v4fig72_plat" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#F19C99;strokeColor=#666666;fontSize=28;fontStyle=1;verticalAlign=top;align=left;spacingLeft=8;spacingTop=4;" value="SINGLE permissioned platform - the ledger IS the authoritative record (D2: native DLT record operated by or under the authority of a CSD - the SDX pattern); no second support, no reconciliation" vertex="1"><mxGeometry height="600" width="700" x="380" y="160" as="geometry" /></mxCell>
+        <mxCell id="v4fig72_not" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=18;" value="Notary / CSD node&#xa;endorses issuance" vertex="1"><mxGeometry height="60" width="250" x="420" y="220" as="geometry" /></mxCell>
+        <mxCell id="v4fig72_tok" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;fontSize=19;fontStyle=1;" value="Security token contract&#xa;GOLDEN RECORD (lifecycle on-ledger)" vertex="1"><mxGeometry height="90" width="250" x="420" y="320" as="geometry" /></mxCell>
+        <mxCell id="v4fig72_dvp" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;fontSize=16;fontStyle=1;" value="ON-LEDGER DvP CONTRACT - ACTIVE&#xa;compliance check = explicit precondition of the swap (R16)&#xa;O1 + O2 grouped in ONE platform transaction" vertex="1"><mxGeometry height="140" width="290" x="760" y="300" as="geometry" /></mxCell>
+        <mxCell id="v4fig72_wcb" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=17;" value="wCBDC token contract&#xa;native central bank money in token form" vertex="1"><mxGeometry height="80" width="290" x="760" y="490" as="geometry" /></mxCell>
+        <mxCell id="v4fig72_bus" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=21;" value="UNIFIED event bus - both legs, ONE publication mechanism" vertex="1"><mxGeometry height="60" width="630" x="420" y="600" as="geometry" /></mxCell>
+        <mxCell id="v4fig72_in1" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#999999;fontSize=15;dashed=1;fontColor=#666666;" value="Trigger orchestrator - INACTIVE (B1)" vertex="1"><mxGeometry height="50" width="190" x="420" y="680" as="geometry" /></mxCell>
+        <mxCell id="v4fig72_in2" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#999999;fontSize=15;dashed=1;fontColor=#666666;" value="HTLC pair - INACTIVE (B3)" vertex="1"><mxGeometry height="50" width="190" x="630" y="680" as="geometry" /></mxCell>
+        <mxCell id="v4fig72_in3" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#999999;fontSize=15;dashed=1;fontColor=#666666;" value="Reconciliation - ABSENT (single support)" vertex="1"><mxGeometry height="50" width="210" x="840" y="680" as="geometry" /></mxCell>
+        <mxCell id="v4fig72_rtgs" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=16;" value="RTGS (existing) - OUTSIDE the settlement path.&#xa;On-ramp only: intraday issuance / redemption of wCBDC against RTGS balances (R15)" vertex="1"><mxGeometry height="120" width="360" x="1180" y="470" as="geometry" /></mxCell>
+        <mxCell id="v4fig72_inv" parent="1" style="text;html=1;strokeColor=#d6b656;fillColor=#fff2cc;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=1;fontSize=13;spacing=8;" value="WHAT GUARANTEES &#39;both legs or neither&#39; IN B2? The platform itself: the bond transfer (O1) and the cash transfer (O2) sit inside ONE platform transaction, which commits entirely or not at all - like a single database transaction. There is never a moment where one leg has moved and the other has not.&#xa;WHAT IT COSTS: everything must live on one platform - central bank money must exist on-ledger (native wCBDC) and the law must recognise the ledger as the authoritative record (R01). Control = operations reserved to the central bank (C1 pause, C2 exclusive mint/burn) (R14); ONE supervisory surface sees both legs (R11).&#xa;WHAT PROVES IT: by construction (Chapter 5 proof of concept) and by reference (Helvetia II-III, Jura) [14][15][16]." vertex="1"><mxGeometry height="100" width="1480" x="60" y="810" as="geometry" /></mxCell>
+        <mxCell id="v4fig72_e2" edge="1" parent="1" source="v4fig72_iss" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;fontSize=11;labelBackgroundColor=#ffffff;strokeColor=#999999;strokeWidth=1;jettySize=auto;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" target="v4fig72_not" value="I1 issuance registration">
+          <mxGeometry relative="1" x="-0.2727" y="15" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="v4fig72_e3" edge="1" parent="1" source="v4fig72_not" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;fontSize=11;labelBackgroundColor=#ffffff;strokeColor=#999999;strokeWidth=1;jettySize=auto;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" target="v4fig72_tok" value="I2 mint into the golden record (CSD endorsement)">
+          <mxGeometry relative="1" x="-0.5" y="135" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="v4fig72_e4" edge="1" parent="1" source="v4fig72_par" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;fontSize=11;labelBackgroundColor=#ffffff;strokeColor=#000000;strokeWidth=1;jettySize=auto;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.64;entryDx=0;entryDy=0;" target="v4fig72_dvp" value="I3 transfer instruction">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="340" y="385" />
+              <mxPoint x="340" y="460" />
+              <mxPoint x="720" y="460" />
+              <mxPoint x="720" y="390" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="v4fig72_e5" edge="1" parent="1" source="v4fig72_dvp" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;fontSize=11;labelBackgroundColor=#ffffff;strokeColor=#d79b00;strokeWidth=2;jettySize=auto;exitX=0;exitY=0.3;exitDx=0;exitDy=0;entryX=1;entryY=0.5;entryDx=0;entryDy=0;" target="v4fig72_tok" value="O1 securities-leg transfer">
+          <mxGeometry relative="1" x="-0.2041" y="-13" as="geometry">
+            <mxPoint x="8" y="-12" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="v4fig72_e6" edge="1" parent="1" source="v4fig72_dvp" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;fontSize=11;labelBackgroundColor=#ffffff;strokeColor=#d79b00;strokeWidth=2;jettySize=auto;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" target="v4fig72_wcb" value="O2 cash-leg transfer">
+          <mxGeometry relative="1" x="0.2" y="85" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="v4fig72_e7" edge="1" parent="1" source="v4fig72_wcb" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;fontSize=11;labelBackgroundColor=#ffffff;strokeColor=#999999;strokeWidth=1;jettySize=auto;exitX=0.25;exitY=1;exitDx=0;exitDy=0;entryX=0.66;entryY=0;entryDx=0;entryDy=0;" target="v4fig72_bus" value="single publication">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="v4fig72_e8" edge="1" parent="1" source="v4fig72_cb" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;fontSize=11;labelBackgroundColor=#ffffff;strokeColor=#82b366;strokeWidth=1;jettySize=auto;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" target="v4fig72_dvp" value="C1 pause (scoped, reserved operation)">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="280" y="135" />
+              <mxPoint x="905" y="135" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="v4fig72_e9" edge="1" parent="1" source="v4fig72_cb" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;fontSize=11;labelBackgroundColor=#ffffff;strokeColor=#82b366;strokeWidth=1;jettySize=auto;exitX=0.86;exitY=1;exitDx=0;exitDy=0;entryX=1;entryY=0.5;entryDx=0;entryDy=0;" target="v4fig72_wcb" value="C2 mint / burn wCBDC - EXCLUSIVE central-bank authority">
+          <mxGeometry relative="1" x="0.2214" y="80" as="geometry">
+            <mxPoint as="offset" />
+            <Array as="points">
+              <mxPoint x="438" y="120" />
+              <mxPoint x="1120" y="120" />
+              <mxPoint x="1120" y="530" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="v4fig72_e10" edge="1" parent="1" source="v4fig72_wcb" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;fontSize=11;labelBackgroundColor=#ffffff;strokeColor=#999999;strokeWidth=1;jettySize=auto;dashed=1;startArrow=classic;startFill=1;exitX=1;exitY=0.8;exitDx=0;exitDy=0;entryX=0;entryY=0.7;entryDx=0;entryDy=0;" target="v4fig72_rtgs" value="on-ramp: conversion against RTGS balances (via C2), balance-sheet neutral">
+          <mxGeometry relative="1" x="0.5385" y="-16" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="v4fig72_e11" edge="1" parent="1" source="v4fig72_sup" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;fontSize=11;labelBackgroundColor=#ffffff;strokeColor=#9673a6;strokeWidth=1;jettySize=auto;dashed=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=1;entryY=0.5;entryDx=0;entryDy=0;" target="v4fig72_bus" value="S1 + S2 unified read-only observation (ONE surface)">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="1565" y="70" />
+              <mxPoint x="1565" y="630" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+  <diagram id="v4fig73" name="Fig 4.5 - Variant B3 HTLC cross-ledger (cryptographic locks)">
+    <mxGraphModel dx="2020" dy="1061" grid="0" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1600" pageHeight="1100" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="v4fig73_nl" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#999999;fontSize=13;dashed=1;fontColor=#666666;" value="No central-bank WRITE authority on the securities register: authority passes through the rulebook only (L1). This is the B3 x R14 tension flagged in 4.3 / 4.6." vertex="1"><mxGeometry height="80" width="400" x="300" y="40" as="geometry" /></mxCell>
+        <mxCell id="v4fig73_cb" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=13;" value="CENTRAL BANK - native governance of the CASH REGISTER ONLY.&#xa;Ex ante control: admission, ceilings, lock parameters, mint/burn, freeze. NO intervention point mid-protocol." vertex="1"><mxGeometry height="80" width="400" x="940" y="40" as="geometry" /></mxCell>
+        <mxCell id="v4fig73_sel" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=19;" value="SELLER participant&#xa;(holds the bond)" vertex="1"><mxGeometry height="80" width="200" x="60" y="200" as="geometry" /></mxCell>
+        <mxCell id="v4fig73_buy" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=20;" value="BUYER participant&#xa;(holds wCBDC)" vertex="1"><mxGeometry height="80" width="200" x="1360" y="200" as="geometry" /></mxCell>
+        <mxCell id="v4fig73_secl" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#F19C99;strokeColor=#666666;fontSize=28;fontStyle=1;verticalAlign=top;align=left;spacingLeft=8;spacingTop=4;" value="SECURITIES LEDGER - authoritative for the bond" vertex="1"><mxGeometry height="400" width="400" x="300" y="180" as="geometry" /></mxCell>
+        <mxCell id="v4fig73_stok" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=22;" value="Security token contract&#xa;(authoritative record)" vertex="1"><mxGeometry height="70" width="360" x="320" y="230" as="geometry" /></mxCell>
+        <mxCell id="v4fig73_shtlc" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;fontSize=17;fontStyle=1;" value="Securities HTLC contract&#xa;lock under (hashlock h, timeout T_sec)" vertex="1"><mxGeometry height="80" width="360" x="320" y="330" as="geometry" /></mxCell>
+        <mxCell id="v4fig73_sh4" parent="1" style="text;html=1;strokeColor=none;fillColor=none;fontSize=15;fontStyle=2;fontColor=#666666;" value="H4: refund to seller on expiry of T_sec" vertex="1"><mxGeometry height="31" width="360" x="320" y="415" as="geometry" /></mxCell>
+        <mxCell id="v4fig73_sobs" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=18;" value="Event observation (per register)&#xa;lock / reveal natively public" vertex="1"><mxGeometry height="60" width="360" x="320" y="470" as="geometry" /></mxCell>
+        <mxCell id="v4fig73_cashl" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#F19C99;strokeColor=#666666;fontSize=28;fontStyle=1;verticalAlign=top;align=left;spacingLeft=8;spacingTop=4;" value="CASH LEDGER - central-bank wCBDC register (distinct register: D1, D5)" vertex="1"><mxGeometry height="400" width="400" x="940" y="180" as="geometry" /></mxCell>
+        <mxCell id="v4fig73_ctok" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=22;" value="wCBDC token contract&#xa;(CB-issued)" vertex="1"><mxGeometry height="70" width="360" x="960" y="230" as="geometry" /></mxCell>
+        <mxCell id="v4fig73_chtlc" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;fontSize=17;fontStyle=1;" value="Cash HTLC contract&#xa;lock under (h, T_cash), with T_cash &lt; T_sec" vertex="1"><mxGeometry height="80" width="360" x="960" y="330" as="geometry" /></mxCell>
+        <mxCell id="v4fig73_ch4" parent="1" style="text;html=1;strokeColor=none;fillColor=none;fontSize=15;fontStyle=2;fontColor=#666666;" value="H4: refund to buyer on expiry of T_cash" vertex="1"><mxGeometry height="31" width="360" x="960" y="415" as="geometry" /></mxCell>
+        <mxCell id="v4fig73_cobs" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=20;" value="Event observation (per register)" vertex="1"><mxGeometry height="60" width="360" x="960" y="470" as="geometry" /></mxCell>
+        <mxCell id="v4fig73_noco" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;fontSize=13;dashed=1;fontStyle=1;" value="NO COORDINATION COMPONENT&#xa;&#xa;no trusted third party: the joint behaviour of the two sovereign registers is fixed by ONE secret s and the strict nesting T_cash &lt; T_sec" vertex="1"><mxGeometry height="190" width="160" x="740" y="170" as="geometry" /></mxCell>
+        <mxCell id="v4fig73_sup" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;fontSize=17;" value="SUPERVISION - TWO read-only surfaces, one per register, correlated by transferId (R11)" vertex="1"><mxGeometry height="70" width="400" x="400" y="760" as="geometry" /></mxCell>
+        <mxCell id="v4fig73_inv" parent="1" style="text;html=1;strokeColor=#d6b656;fillColor=#fff2cc;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=1;fontSize=15;spacing=8;" value="WHAT GUARANTEES &#39;both legs or neither&#39; IN B3? Mathematics, not an institution: both locks open with the SAME secret s, and the cash window closes before the securities window (T_cash &lt; T_sec). The seller reveals s to take the cash - and revealing it hands the buyer the key to the bonds. If s is never revealed, both locks expire and each side gets its asset back (H4).&#xa;WHAT IT COSTS: nobody can step in mid-exchange - no coordinator exists (the B3 x R14 tension); a late signature near T_cash can expose one party, remedied by a premium [10] (open point, R10); the law must recognise a lock-conditioned transfer (B3 x R01).&#xa;WHAT PROVES IT: documented exploration only - TIPS Hash-Link, partial match [17]." vertex="1"><mxGeometry height="110" width="1480" x="60" y="960" as="geometry" /></mxCell>
+        <mxCell id="v4fig73_e2" edge="1" parent="1" source="v4fig73_cb" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;fontSize=11;labelBackgroundColor=#ffffff;strokeColor=#82b366;strokeWidth=1;jettySize=auto;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" target="v4fig73_cashl" value="C - ex ante only">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="v4fig73_e3" edge="1" parent="1" source="v4fig73_sel" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;fontSize=11;labelBackgroundColor=#ffffff;strokeColor=#000000;strokeWidth=2;jettySize=auto;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.3;entryDx=0;entryDy=0;" target="v4fig73_shtlc" value="H1 lock securities (h, T_sec)">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="285" y="240" />
+              <mxPoint x="285" y="354" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="v4fig73_e4" edge="1" parent="1" source="v4fig73_buy" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;fontSize=11;labelBackgroundColor=#ffffff;strokeColor=#000000;strokeWidth=2;jettySize=auto;exitX=0;exitY=0.5;exitDx=0;exitDy=0;entryX=1;entryY=0.3;entryDx=0;entryDy=0;" target="v4fig73_chtlc" value="H2 lock cash (h, T_cash &lt; T_sec) - after verifying H1">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="1340" y="240" />
+              <mxPoint x="1340" y="354" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="v4fig73_e5" edge="1" parent="1" source="v4fig73_sel" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;fontSize=11;labelBackgroundColor=#ffffff;strokeColor=#d79b00;strokeWidth=2;jettySize=auto;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0;entryY=0.8;entryDx=0;entryDy=0;" target="v4fig73_chtlc" value="H3 seller reveals s and claims the cash - s becomes public">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="160" y="900" />
+              <mxPoint x="890" y="900" />
+              <mxPoint x="890" y="394" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="v4fig73_e6" edge="1" parent="1" source="v4fig73_buy" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;fontSize=11;labelBackgroundColor=#ffffff;strokeColor=#d79b00;strokeWidth=2;jettySize=auto;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=1;entryY=0.7;entryDx=0;entryDy=0;" target="v4fig73_shtlc" value="H3 buyer claims the securities with s, before T_sec">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="1460" y="930" />
+              <mxPoint x="800" y="930" />
+              <mxPoint x="800" y="386" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="v4fig73_e7" edge="1" parent="1" source="v4fig73_sup" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;fontSize=11;labelBackgroundColor=#ffffff;strokeColor=#9673a6;strokeWidth=1;jettySize=auto;dashed=1;exitX=0.25;exitY=0;exitDx=0;exitDy=0;entryX=0.5;entryY=1;entryDx=0;entryDy=0;" target="v4fig73_sobs" value="S">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="v4fig73_e8" edge="1" parent="1" source="v4fig73_sup" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;fontSize=11;labelBackgroundColor=#ffffff;strokeColor=#9673a6;strokeWidth=1;jettySize=auto;dashed=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0.5;entryY=1;entryDx=0;entryDy=0;" target="v4fig73_cobs" value="S">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="1140" y="795" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

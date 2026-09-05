@@ -10,15 +10,7 @@ import org.hyperledger.fabric.contract.annotation.Transaction;
 import org.hyperledger.fabric.shim.Chaincode;
 import org.hyperledger.fabric.shim.ChaincodeException;
 
-/**
- * Coordinateur de reglement DvP de la variante B2 (Ch. 7.2, sections 8.3-8.4) :
- * la machine a etats du cycle de vie d'un trade et le swap atomique O1+O2 -
- * deux invocations groupees dans UNE transaction de plateforme; si l'une
- * echoue, aucun solde ne change (invariant 8.6).
- *
- * Le plan de controle banque centrale (flux C, R14) est porte par le contrat
- * distinct CentralBankOperations ("dvpAdmin"), meme chaincode, meme namespace.
- */
+
 @Contract(
         name = "dvp",
         info = @Info(
@@ -144,7 +136,7 @@ public final class DvPContract implements ContractInterface {
         if (buyerCash >= trade.cashAmount) {
             // O1 + O2 : deux invocations, UNE transaction de plateforme.
             // Si l'une echoue, la transaction entiere est invalidee - aucun
-            // etat intermediaire n'est constructible (invariant 8.6).
+            // etat intermediaire n'est constructible (invariant 5.1).
             invokeCC(ctx, BOND_CC, "bondSettlement:transferForTrade", tradeId,
                     trade.sellerMsp, trade.buyerMsp, trade.isin, Long.toString(trade.bondAmount));
             invokeCC(ctx, WCBDC_CC, "transferForTrade", tradeId,

@@ -2,7 +2,7 @@
 #   A. Rebuild + hot-swap des jars bond/wcbdc (fonctions *ForTrade v1.1)
 #   B. Upgrade gouverne des definitions bond/wcbdc (sequence 2 = amendement 3/5)
 #   C. Deploiement du coordinateur dvp (machine a etats + swap atomique)
-#   D. Tests de fumee D-1..D-13 (prefiguration des tests T1-T9 du chapitre 8)
+#   D. Tests de fumee D-1..D-13 (prefiguration des tests T1-T9 du chapitre 5)
 $ErrorActionPreference = 'Stop'
 
 $ORD_CA  = '/work/crypto/ordererOrganizations/infra.dvp.poc/orderers/orderer.infra.dvp.poc/tls/ca.crt'
@@ -141,20 +141,34 @@ Write-Host "  -> dvp v1.0 committe."
 Write-Host ""
 Write-Host "=== PHASE D: tests de fumee ==="
 
+# NB: PowerShell 5.1 ne protege pas un argument natif qui contient deja des
+# guillemets (\") - le moindre espace coupe alors le JSON en deux arguments
+# ("unexpected end of JSON input" cote peer). On refuse donc tout espace
+# plutot que d'echouer de facon cryptique: valeurs libres avec des tirets.
+function AssertNoSpace([string]$json) {
+    if ($json -match '\s') {
+        throw "argument chaincode contenant un espace (coupe par PowerShell 5.1): $json"
+    }
+}
 function InvokeCC([string[]]$org, [string[]]$peers, [string]$cc, [string]$json) {
+    AssertNoSpace $json
     & docker exec @org dvp-cli peer chaincode invoke -o $ORDERER --tls --cafile $ORD_CA `
         -C $CHANNEL -n $cc @peers -c $json --waitForEvent
     return $LASTEXITCODE
 }
 function QueryCC([string[]]$org, [string]$cc, [string]$json) {
+    AssertNoSpace $json
     return (& docker exec @org dvp-cli peer chaincode query -C $CHANNEL -n $cc -c $json)
 }
+# NB: noms locaux distincts de $BA/$BB/$CB - les variables PowerShell sont
+# INSENSIBLES a la casse: dans la fonction, $bA masque $BA (et $cB la
+# banque centrale), d'ou "No such container: 800000" et des soldes vides.
 function PrintBalances([string]$label) {
-    $bA = QueryCC $BA 'bond'  '{\"function\":\"balanceOf\",\"Args\":[\"FR0001\",\"BankAMSP\"]}'
-    $bB = QueryCC $BA 'bond'  '{\"function\":\"balanceOf\",\"Args\":[\"FR0001\",\"BankBMSP\"]}'
-    $cA = QueryCC $BA 'wcbdc' '{\"function\":\"balanceOf\",\"Args\":[\"BankAMSP\"]}'
-    $cB = QueryCC $BA 'wcbdc' '{\"function\":\"balanceOf\",\"Args\":[\"BankBMSP\"]}'
-    Write-Host "  [$label] titres A=$bA B=$bB | cash A=$cA B=$cB"
+    $bondA = QueryCC $BA 'bond'  '{\"function\":\"balanceOf\",\"Args\":[\"FR0001\",\"BankAMSP\"]}'
+    $bondB = QueryCC $BA 'bond'  '{\"function\":\"balanceOf\",\"Args\":[\"FR0001\",\"BankBMSP\"]}'
+    $cashA = QueryCC $BA 'wcbdc' '{\"function\":\"balanceOf\",\"Args\":[\"BankAMSP\"]}'
+    $cashB = QueryCC $BA 'wcbdc' '{\"function\":\"balanceOf\",\"Args\":[\"BankBMSP\"]}'
+    Write-Host "  [$label] titres A=$bondA B=$bondB | cash A=$cashA B=$cashB"
 }
 
 Write-Host "--- D-1: la banque centrale admet BankA et BankB (R03) et fixe le plafond R16 ---"
@@ -181,15 +195,18 @@ Write-Host "--- D-6 (NEGATIF): rejouer le reglement de T100 (deja SETTLED) ---"
 if ((InvokeCC $BB $BANKS_PEERS 'dvp' '{\"function\":\"executeSettlement\",\"Args\":[\"T100\"]}') -eq 0) { throw "D-6: aurait du etre refuse" }
 Write-Host "  -> REFUSE comme attendu: pas de double reglement."
 
-Write-Host "--- D-7 (NEGATIF): BankB appelle bond.transferForTrade DIRECTEMENT (contournement du dvp) ---"
-if ((InvokeCC $BB @('--peerAddresses', 'peer0.bankb.dvp.poc:10051', '--tlsRootCertFiles', $bbTls) 'bond' '{\"function\":\"bondSettlement:transferForTrade\",\"Args\":[\"T100\"]}') -eq 0) { throw "D-7: aurait du etre refuse" }
-Write-Host "  -> REFUSE comme attendu: une jambe seule est inexecutable (invariant protege)."
+Write-Host "--- D-7 (NEGATIF): BankB appelle bondSettlement:transferForTrade DIRECTEMENT (contournement du dvp) ---"
+# Signature v1.1 complete (tradeId, sellerMsp, buyerMsp, isin, amount): avec un
+# seul argument le routeur Java echoue AVANT ProposalGuard ("Unexpected error");
+# avec les cinq, le refus porte son libelle "only invocable through the dvp coordinator".
+if ((InvokeCC $BB @('--peerAddresses', 'peer0.bankb.dvp.poc:10051', '--tlsRootCertFiles', $bbTls) 'bond' '{\"function\":\"bondSettlement:transferForTrade\",\"Args\":[\"T100\",\"BankAMSP\",\"BankBMSP\",\"FR0001\",\"100000\"]}') -eq 0) { throw "D-7: aurait du etre refuse" }
+Write-Host "  -> REFUSE comme attendu par ProposalGuard: une jambe seule est inexecutable (invariant protege)."
 
 Write-Host "--- D-8: pause C1 (banque centrale), tentative de trade, reprise ---"
-if ((InvokeCC $CB $CB_PEER 'dvp' '{\"function\":\"dvpAdmin:pause\",\"Args\":[\"incident operationnel\"]}') -ne 0) { throw "D-8a" }
+if ((InvokeCC $CB $CB_PEER 'dvp' '{\"function\":\"dvpAdmin:pause\",\"Args\":[\"incident-operationnel\"]}') -ne 0) { throw "D-8a" }
 if ((InvokeCC $BB $BANKS_PEERS 'dvp' '{\"function\":\"proposeTrade\",\"Args\":[\"T101\",\"BankBMSP\",\"BankAMSP\",\"FR0001\",\"1000\",\"950\",\"EUR\",\"300\",\"600\"]}') -eq 0) { throw "D-8b: aurait du etre refuse" }
 Write-Host "  -> proposition REFUSEE pendant la pause (C1)."
-if ((InvokeCC $BA $BANKS_PEERS 'dvp' '{\"function\":\"dvpAdmin:pause\",\"Args\":[\"tentative illegitime\"]}') -eq 0) { throw "D-8c: aurait du etre refuse" }
+if ((InvokeCC $BA $BANKS_PEERS 'dvp' '{\"function\":\"dvpAdmin:pause\",\"Args\":[\"tentative-illegitime\"]}') -eq 0) { throw "D-8c: aurait du etre refuse" }
 Write-Host "  -> pause par BankA REFUSEE (operation reservee R14)."
 if ((InvokeCC $CB $CB_PEER 'dvp' '{\"function\":\"dvpAdmin:unpause\",\"Args\":[]}') -ne 0) { throw "D-8d" }
 

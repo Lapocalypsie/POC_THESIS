@@ -1,7 +1,7 @@
-// Harnais de tests T1-T9 du chapitre 8 (section 8.7).
+// Harnais de tests T1-T9 du PoC (memoire, chapitre 5, section 5.3).
 // Tests d'integration bout-en-bout: JUnit 5 + Fabric Gateway SDK, executes
 // contre le reseau reel (aucun mock). Le rapport JUnit est l'artefact de
-// preuve (Annexe E); le tableau du 8.7 s'en deduit ligne a ligne.
+// preuve (Figure 5.2, Annexe A); les tableaux 5.3 et 5.4 s'en deduisent.
 plugins {
     id 'java'
 }
