@@ -1,35 +1,14 @@
-# --- Generated Fabric material (recreated by network-up.ps1) ---------------
-network/crypto/
-network/artifacts/
+# --- Versions anterieures / brouillons : non publies ------------------------
+_archive/
 
-# --- Gradle / Java build output --------------------------------------------
-build/
-.gradle/
-**/build/
-**/.gradle/
-*.class
-*.jar
-!gradle/wrapper/gradle-wrapper.jar
+# --- Bibliographie : PDF de revues sous copyright, non redistribuables -------
+# (retirer cette ligne pour les inclure)
+articles/
 
-# --- IDE --------------------------------------------------------------------
-.idea/
-.vscode/
-*.iml
-.classpath
-.project
-.settings/
-
-# --- OS ---------------------------------------------------------------------
+# --- Fichiers temporaires Office / OS ---------------------------------------
+~$*.docx
+~$*.xlsx
+.~lock.*
 Thumbs.db
 Desktop.ini
 .DS_Store
-
-# --- Evidence: the artefacts are committed, the bulky by-products are not ---
-evidence/05_junit/binary/
-tests/build/
-
-# --- Working notes, not part of the published material -------------------
-"Claude outputs"/
-
-# --- Amorcage local du depot, pas destine a etre publie -------------------
-init-repo.ps1
